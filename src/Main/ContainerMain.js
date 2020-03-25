@@ -1,6 +1,11 @@
 import React from 'react';
+import {BrowserRouter as Router, Switch, Route, Link} from 'react-router-dom';
 import styled from 'styled-components';
 import Cards from '../controls/Cards';
+import { EnhancedTableHead } from '../controls';
+import PrimarySearchAppBar from '../controls/AppBar';
+import { Header } from './Header';
+import { routes } from '../routes';
 
 const ContainerMainStyled = styled.div`
     position: fixed;
@@ -13,7 +18,20 @@ const ContainerMainStyled = styled.div`
     /* background: blue; */
 `;
 
-export const ContainerMain = () => 
-    <ContainerMainStyled> 
-        <Cards items={[{title: 'Reservar'}, {title: 'Reservar'}, {title: 'Reservar'}, {title: 'Reservar'} ]} /> 
+const TestCards = () => <Cards items={routes} />
+
+const TestTable = () => <EnhancedTableHead />;
+
+export const ContainerMain = () =>
+    <ContainerMainStyled>
+
+        <Header> <PrimarySearchAppBar /> </Header>
+
+        
+            <Router>
+                  <Switch>
+                      <Route path="/home" component={TestCards}/>
+                      <Route path="/home/table" component={TestTable}/>
+                </Switch>  
+            </Router>
     </ContainerMainStyled>

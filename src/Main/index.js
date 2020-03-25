@@ -1,9 +1,10 @@
 import React from 'react';
+import {BrowserRouter as Router, Switch, Route, Link} from 'react-router-dom';
 import styled from 'styled-components';
-import { Header } from './Header';
+
 import { ContainerMain } from './ContainerMain';
 
-import PrimarySearchAppBar from '../controls/AppBar';
+import { Login } from '../Containers/Login';
 
 const MainStyled = styled.div`
     position: fixed;
@@ -17,6 +18,10 @@ const MainStyled = styled.div`
 
 export const Main = () => 
             <MainStyled >
-                <Header> <PrimarySearchAppBar /> </Header>
-                <ContainerMain />
+                <Router>
+                  <Switch>
+                      <Route path="/home" component={ContainerMain}/>
+                      <Route path="/" component={Login}/>
+                </Switch>  
+            </Router>
             </MainStyled>
