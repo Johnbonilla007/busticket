@@ -5,7 +5,7 @@ import styled from 'styled-components';
 import { ContainerMain } from './ContainerMain';
 
 import { Login } from '../Containers/Login';
-import AlertNotification from '../controls/Alert';
+import AlertNotification from '../Controls/Alert';
 
 const MainStyled = styled.div`
     position: fixed;

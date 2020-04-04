@@ -1,5 +1,5 @@
 import React from 'react';
-import ListControl from '../../controls/List';
+import ListControl from '../../Controls/List';
 
 const rows = [
     {

@@ -1,5 +1,5 @@
 import React from 'react';
-import Cards from '../controls/Cards';
+import Cards from '../Controls/Cards';
 import { routes } from '../routes';
 
 const Dashboard = ({history, match}) => {

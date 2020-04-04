@@ -1,6 +1,6 @@
 import React from 'react';
 import Checkbox from '@material-ui/core/Checkbox';
-import { TableControl } from '../../controls';
+import { TableControl } from '../../Controls';
 
 const onRenderCell = row => {
     return <Checkbox />
