@@ -11,10 +11,10 @@ const CardsStyled = styled.div`
     /* background: green; */
 `;
 
-const Cards = ({items}) => {
+const Cards = ({items, onClick}) => {
 
     return <CardsStyled>
-            {utils.evaluateArray(items) ? items.map(item => <CardItem item={item} />) : null}
+            {utils.evaluateArray(items) ? items.map(item => <CardItem item={item} onClick={onClick} />) : null}
         </CardsStyled>
 }
 

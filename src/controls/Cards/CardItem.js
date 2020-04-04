@@ -39,7 +39,7 @@ const useStyles = makeStyles(theme => ({
   },
 }));
 
-const CardItem = ({item}) => {
+const CardItem = ({item, onClick}) => {
   const classes = useStyles();
   const [expanded, setExpanded] = React.useState(false);
 
@@ -48,7 +48,7 @@ const CardItem = ({item}) => {
   };
 
   return (
-    <Card className={classes.root}>
+    <Card className={classes.root} onClick={() => onClick(item)}>
       <CardHeader
         // avatar={
         //   <Avatar aria-label="recipe" className={classes.avatar}>
@@ -73,7 +73,7 @@ const CardItem = ({item}) => {
           HOla en el centro va una imagen
         </Typography>
       </CardContent>
-      <CardActions disableSpacing>
+      {/* <CardActions disableSpacing>
         <IconButton aria-label="add to favorites">
           <FavoriteIcon />
         </IconButton>
@@ -90,7 +90,7 @@ const CardItem = ({item}) => {
         >
           <ExpandMoreIcon />
         </IconButton>
-      </CardActions>
+      </CardActions> */}
     </Card>
   );
 }

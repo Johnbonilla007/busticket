@@ -1,15 +1,15 @@
-import Cards from "../controls/Cards";
-import { EnhancedTableHead } from "../controls";
+import Destinations from "../Containers/Destinations";
+import Schedule from "../Containers/Schedule";
 
 export const routes = [
     {
-        path: "/home/cards",
+        path: "/home/destinations",
         title: 'Destinos',
-        component: Cards
+        component: Destinations
     },
     {
-        path: "/home/table",
-        title: 'Table',
-        component: EnhancedTableHead
+        path: "/home/schedule",
+        title: 'Schedule',
+        component: Schedule
     }
 ];

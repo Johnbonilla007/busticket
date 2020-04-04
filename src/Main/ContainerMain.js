@@ -1,10 +1,11 @@
-import React from 'react';
-import {BrowserRouter as Router, Switch, Route, Link} from 'react-router-dom';
+import React, {useState} from 'react';
 import styled from 'styled-components';
-import Cards from '../controls/Cards';
-import { EnhancedTableHead } from '../controls';
+import {BrowserRouter as Router, Switch, Route, Link} from 'react-router-dom';
 import PrimarySearchAppBar from '../controls/AppBar';
+
 import { Header } from './Header';
+import Dashboard from '../Dashboard';
+
 import { routes } from '../routes';
 
 const ContainerMainStyled = styled.div`
@@ -14,24 +15,19 @@ const ContainerMainStyled = styled.div`
     left: 0px;
     bottom: 0px;
     padding: 5px;
-
-    /* background: blue; */
 `;
 
-const TestCards = () => <Cards items={routes} />
+export const ContainerMain = () =>{
 
-const TestTable = () => <EnhancedTableHead />;
+    const routeComponents = routes.map(({path, component}, key) => <Route exact path={path} component={component} key={key} />)
 
-export const ContainerMain = () =>
-    <ContainerMainStyled>
-
+    return <ContainerMainStyled>
         <Header> <PrimarySearchAppBar /> </Header>
-
-        
             <Router>
                   <Switch>
-                      <Route path="/home" component={TestCards}/>
-                      <Route path="/home/table" component={TestTable}/>
+                      {routeComponents}
+                      <Route exact path="/home" component={Dashboard}/>
                 </Switch>  
             </Router>
-    </ContainerMainStyled>
+
+    </ContainerMainStyled>}

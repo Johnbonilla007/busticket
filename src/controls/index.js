@@ -1,5 +1,9 @@
-import EnhancedTableHead from './Table';
+import TableControl from './Table';
+import ListControl from './List';
+import Cards from './Cards';
 
 export {
-    EnhancedTableHead,
+    TableControl,
+    ListControl,
+    Cards,
 }

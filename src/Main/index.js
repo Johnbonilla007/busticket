@@ -5,6 +5,7 @@ import styled from 'styled-components';
 import { ContainerMain } from './ContainerMain';
 
 import { Login } from '../Containers/Login';
+import AlertNotification from '../controls/Alert';
 
 const MainStyled = styled.div`
     position: fixed;
@@ -21,7 +22,12 @@ export const Main = () =>
                 <Router>
                   <Switch>
                       <Route path="/home" component={ContainerMain}/>
+                      <Route path="/dashboard" component={ContainerMain}/>
                       <Route path="/" component={Login}/>
                 </Switch>  
             </Router>
+
+            <AlertNotification id="alert-notification" />
+
+            {/* <div id="alert-notification" /> */}
             </MainStyled>
