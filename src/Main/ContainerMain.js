@@ -7,14 +7,17 @@ import { Header } from './Header';
 import Dashboard from '../Dashboard';
 
 import { routes } from '../routes';
+import BackgroundMain from '../BackgroundMain/main';
 
 const ContainerMainStyled = styled.div`
-    position: fixed;
-    top: 70px;
-    right: 0px;
-    left: 0px;
-    bottom: 0px;
-    padding: 5px;
+    .container {
+        position: fixed;
+        top: 70px;
+        right: 0px;
+        left: 0px;
+        bottom: 0px;
+        padding: 5px;
+    }
 `;
 
 export const ContainerMain = () =>{
@@ -22,12 +25,14 @@ export const ContainerMain = () =>{
     const routeComponents = routes.map(({path, component}, key) => <Route exact path={path} component={component} key={key} />)
 
     return <ContainerMainStyled>
-        <Header> <PrimarySearchAppBar /> </Header>
-            <Router>
-                  <Switch>
-                      {routeComponents}
-                      <Route exact path="/home" component={Dashboard}/>
-                </Switch>  
-            </Router>
-
+        <BackgroundMain />
+        <div className="container">
+            <Header> <PrimarySearchAppBar /> </Header>
+                    <Router>
+                    <Switch>
+                        {routeComponents}
+                        <Route exact path="/home" component={Dashboard}/>
+                    </Switch>
+                </Router>
+        </div>
     </ContainerMainStyled>}

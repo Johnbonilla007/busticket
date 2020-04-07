@@ -1,6 +1,6 @@
 import React from 'react';
 import Checkbox from '@material-ui/core/Checkbox';
-import { TableControl } from '../../Controls';
+import { TableControl, TextFieldControl } from '../../Controls';
 
 const onRenderCell = row => {
     return <Checkbox />
@@ -42,9 +42,15 @@ const headCells = [
   ];
 
 const Schedule = () => {
+
+    const handleFieldOnChange = (value) => {
+        debugger
+    }
+
     return <div>
         <h1>Schedule</h1>
-        <TableControl fieldKey="name" columns={headCells} rows={rows} />
+        {/* <TableControl fieldKey="name" columns={headCells} rows={rows} /> */}
+        <TextFieldControl label="Test TextField" onChange={handleFieldOnChange}  />
         </div>
 }
 

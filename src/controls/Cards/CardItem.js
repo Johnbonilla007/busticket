@@ -16,6 +16,8 @@ import ShareIcon from '@material-ui/icons/Share';
 import ExpandMoreIcon from '@material-ui/icons/ExpandMore';
 import MoreVertIcon from '@material-ui/icons/MoreVert';
 
+import PersonAddIcon from '@material-ui/icons/PersonAdd';
+
 const useStyles = makeStyles(theme => ({
   root: {
     maxWidth: 345,
@@ -37,6 +39,10 @@ const useStyles = makeStyles(theme => ({
   avatar: {
     backgroundColor: red[500],
   },
+  img:{
+    weight: '30px',
+    height: 20
+  }
 }));
 
 const CardItem = ({item, onClick}) => {
@@ -65,12 +71,15 @@ const CardItem = ({item, onClick}) => {
       />
       <CardMedia
         className={classes.media}
-        image="/static/images/cards/paella.jpg"
-        title="Paella dish"
+        image={item.pathIcon}
+        title={item.title}
       />
+
+      {/* <img src={item.pathIcon} /> */}
+
       <CardContent>
         <Typography variant="body2" color="textSecondary" component="p">
-          HOla en el centro va una imagen
+          {item.description}
         </Typography>
       </CardContent>
       {/* <CardActions disableSpacing>

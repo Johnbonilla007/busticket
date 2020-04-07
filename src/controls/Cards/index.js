@@ -14,8 +14,8 @@ const CardsStyled = styled.div`
 const Cards = ({items, onClick}) => {
 
     return <CardsStyled>
-            {utils.evaluateArray(items) ? items.map(item => <CardItem item={item} onClick={onClick} />) : null}
-        </CardsStyled>
+                {utils.evaluateArray(items) ? items.map(item => <CardItem item={item} onClick={onClick} />) : null}
+            </CardsStyled>
 }
 
 export default Cards;
