@@ -28,13 +28,16 @@ const Atlantida = () => {
     const [currentTarget, setCurrentTarget] = useState(false);
     const classes = useStyles();
 
-    const handleClick = event => {
-        debugger
+    const handleMouseOver = event => {
         setCurrentTarget(event.currentTarget);
     }
 
+    const handleMouseLeave = event => {
+        setCurrentTarget(null);
+    }
+
     return (
-        <AtlantidaStyled onMouseOver={handleClick}>
+        <AtlantidaStyled onMouseOver={handleMouseOver} onMouseLeave={handleMouseLeave}>
             <img src={atlantida} />
             <strong>Atlántida</strong>
 

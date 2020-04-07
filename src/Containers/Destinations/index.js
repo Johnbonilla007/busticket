@@ -1,17 +1,17 @@
 import React from 'react';
 import styled from 'styled-components';
-
-import mapHonduras from './mapHonduras.png';
-import Atlantida from '../../Controls/Mapa';
+import Departments from './components/departments';
 
 const DestinationsStyled = styled.div`
+    position: relative;
 `;
 
 const Destinations = () => {
 
     return (
         <DestinationsStyled>
-            <Atlantida />
+            <h2>Destinations Deparments</h2>
+            <Departments />
         </DestinationsStyled>
     )
 }
