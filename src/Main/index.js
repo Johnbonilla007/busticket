@@ -2,9 +2,10 @@ import React from 'react';
 import {BrowserRouter as Router, Switch, Route, Link} from 'react-router-dom';
 import styled from 'styled-components';
 
+import Login from '../Containers/Login';
+
 import { ContainerMain } from './ContainerMain';
 
-import { Login } from '../Containers/Login';
 import AlertNotification from '../Controls/Alert';
 
 const MainStyled = styled.div`

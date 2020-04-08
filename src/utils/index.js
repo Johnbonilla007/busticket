@@ -2,6 +2,33 @@ import isArray from 'lodash';
 
 export class utils {
 
+  static getCurrentLocation = () => {
+    let location = null;
+    const onSucccess = position => {
+      location = position;
+    }
+
+    const onError = () => {
+        location = null;
+    }
+
+    if(!!navigator.geolocation){
+        var config = {
+            enableHighAccuracy: true, 
+            maximumAge        : 30000, 
+            timeout           : 27000
+          };
+
+        navigator.geolocation.getCurrentPosition(onSucccess, onError, config);
+    }
+
+    if(!location){
+      return null;
+    }
+
+    return location;
+  }
+
 
   static descendingComparator = (a, b, orderBy) => {
     if (b[orderBy] < a[orderBy]) {

@@ -3,7 +3,7 @@ import styled from 'styled-components';
 import Departments from './components/departments';
 
 const DestinationsStyled = styled.div`
-    position: relative;
+    overflow: auto;
 `;
 
 const Destinations = () => {

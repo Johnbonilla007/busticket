@@ -21,32 +21,32 @@ const useStyles = makeStyles({
 const DepartmentItem = ({item, onClick}) => {
     const classes = useStyles();
     return (
-        <Card className={classes.root}>
-      <CardActionArea>
-        <CardMedia
-          component="img"
-          alt={item.name}
-          height="140"
-          image={item.img}
-          title={item.name}
-        />
-        <CardContent>
-          <Typography gutterBottom variant="h5" component="h2">
-            {item.name}
-          </Typography>
-          <Typography variant="body2" color="textSecondary" component="p">
-            {item.description}
-          </Typography>
-        </CardContent>
-      </CardActionArea>
-      <CardActions>
-        <Button size="small" color="primary">
-          Share
-        </Button>
-        <Button size="small" color="primary">
-          Learn More
-        </Button>
-      </CardActions>
+        <Card className={classes.root} onClick={() => onClick(item)}>
+        <CardActionArea>
+            <CardMedia
+                component="img"
+                alt={item.name}
+                height="140"
+                image={item.img}
+                title={item.name}
+            />
+            <CardContent>
+            <Typography gutterBottom variant="h5" component="h2">
+                {item.name}
+            </Typography>
+            <Typography variant="body2" color="textSecondary" component="p">
+                {item.description}
+            </Typography>
+            </CardContent>
+        </CardActionArea>
+        <CardActions>
+            <Button size="small" color="primary">
+            Share
+            </Button>
+            <Button size="small" color="primary">
+            Learn More
+            </Button>
+        </CardActions>
     </Card>
     )
 }

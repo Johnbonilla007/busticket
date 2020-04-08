@@ -25,7 +25,7 @@ export const ContainerMain = () =>{
     const routeComponents = routes.map(({path, component}, key) => <Route exact path={path} component={component} key={key} />)
 
     return <ContainerMainStyled>
-        <BackgroundMain />
+        <BackgroundMain top="70px" />
         <div className="container">
             <Header> <PrimarySearchAppBar /> </Header>
                     <Router>

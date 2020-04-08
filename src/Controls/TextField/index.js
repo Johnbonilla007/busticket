@@ -73,7 +73,7 @@ const TextFieldControl = ({typeField, prefix, label, onChange }) => {
                             id="standard-adornment-password"
                             type={showPassword ? 'text' : 'password'}
                             value={value}
-                            onChange={handleChange('password')}
+                            onChange={handleChange}
                             endAdornment={
                                     <InputAdornment position="end">
                                         <IconButton

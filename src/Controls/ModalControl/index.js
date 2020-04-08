@@ -20,7 +20,7 @@ function rand() {
 const useStyles = makeStyles((theme) => ({
   paper: {
     position: 'absolute',
-    width: 500,
+    width: 'auto',
     backgroundColor: theme.palette.background.paper,
     border: '2px solid #000',
     boxShadow: theme.shadows[5],
@@ -28,7 +28,7 @@ const useStyles = makeStyles((theme) => ({
   },
 }));
 
-const ModalControl = ({open, onClose, children}) => {
+const ModalControl = ({open, onClose, children, width}) => {
   const classes = useStyles();
   const [modalStyle] = React.useState(getModalStyle);
 

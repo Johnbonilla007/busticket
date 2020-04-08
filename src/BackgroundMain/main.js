@@ -15,7 +15,7 @@ img.bg {
 	
   /* Set up positioning */
   position: fixed;
-  top: 70px;
+  top: ${prop => prop.top};
   left: 0;
 
   opacity: 90%;
@@ -31,7 +31,7 @@ img.bg {
 
 `;
 
-const BackgroundMain = () => {
+const BackgroundMain = ({top}) => {
     const [x, setX] = useState(0);
     const [y, setY] = useState(0);
 
@@ -43,13 +43,11 @@ const BackgroundMain = () => {
         x = w.innerWidth || e.clientWidth || g.clientWidth,
         y = w.innerHeight|| e.clientHeight|| g.clientHeight;
 
-        debugger
-
         setX(x);
         setY(y);
     }, []);
 
-    return <BackgroundMainStyled>
+    return <BackgroundMainStyled top={top}>
             <img className="bg" src={logo} />
         </BackgroundMainStyled>
 }
