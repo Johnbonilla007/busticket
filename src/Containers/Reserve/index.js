@@ -1,6 +1,7 @@
 import React, {useState} from 'react';
 import styled from 'styled-components';
 import { TextFieldControl } from '../../Controls';
+import Payment from '../Payment';
 
 const ReserveStyled = styled.div``;
 
@@ -43,6 +44,9 @@ const Reserve = () => {
                     <span>{client.email}</span>
                 </div>
             </div>
+
+
+            <Payment open onClose={() => {}} />
         </ReserveStyled>
     )
 }
