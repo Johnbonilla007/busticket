@@ -70,7 +70,7 @@ const Login = ({history}) => {
                     <img src={logo} />
 
                     <div>
-                        <Typography>Usuario</Typography>
+                        <Typography>Usuario (Este es un Test)</Typography>
                         <TextFieldControl onChange={handleChange('userName')} />
 
                         <Typography>Contraseña</Typography>
