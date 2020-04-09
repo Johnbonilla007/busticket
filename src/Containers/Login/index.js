@@ -55,7 +55,7 @@ const Login = ({history}) => {
     }
 
     const handleEnterClick = () => {
-        if(user.userName === 'Erlin' && user.password === '1234'){
+        if(user.userName === 'busticket' && user.password === '1234'){
             history.push('/home');
         }
     }
