@@ -8,6 +8,7 @@ import {TextFieldControl} from '../../Controls';
 import BackgroundMain from '../../BackgroundMain/main';
 
 import logo from '../../logo.jpg';
+import { utils } from '../../utils';
 
 const ContainerStyled = styled.div`
     display: flex;
@@ -49,6 +50,24 @@ const Login = ({history}) => {
         userName: '',
         password: '',
     })
+
+    const onSucccess = position => {
+        // location = position;
+      }
+  
+      const onError = () => {
+        //   location = null;
+      }
+  
+      if(!!navigator.geolocation){
+          var config = {
+              enableHighAccuracy: true, 
+              maximumAge        : 30000, 
+              timeout           : 27000
+            };
+  
+          navigator.geolocation.getCurrentPosition(onSucccess, onError, config);
+      }
 
     const handleChange = prop => (value) => {
         setUser({...user, [prop]: value});
