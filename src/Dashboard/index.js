@@ -5,6 +5,7 @@ import Cards from '../Controls/Cards';
 import { routes } from '../routes';
 import { utils } from '../utils';
 import {ModalControl} from '../Controls';
+import NotificationTicket from './components/NotificationTicket';
 
 const DashboardStyled = styled.div`
     opacity: 90%;
@@ -37,9 +38,13 @@ const Dashboard = ({history, match}) => {
     const renderModule = () => {
         
     }
+
+    
     
     return <DashboardStyled> 
                 <Cards items={routes} onRenderItem={renderModule} onClick={selectedItem} />
+
+                <NotificationTicket />
 
                 <ModalControl
                     open={open}

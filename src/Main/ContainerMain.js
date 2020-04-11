@@ -11,6 +11,7 @@ import BackgroundMain from '../BackgroundMain/main';
 
 const ContainerMainStyled = styled.div`
     .container {
+        display: grid;
         position: fixed;
         top: 70px;
         right: 0px;

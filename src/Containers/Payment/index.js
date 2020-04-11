@@ -9,6 +9,9 @@ import {ModalControl, TextFieldControl} from '../../Controls';
 
 
 const PaymentStyled = styled.div`
+
+    width: 400px;
+
     .col-2{
         display: grid;
         grid-template-columns: auto auto;
@@ -21,7 +24,7 @@ const PaymentStyled = styled.div`
 `;
 
 
-const Payment = ({open, onClose}) => {
+const PaymentControl = ({onRegisterPaymetCard}) => {
     const [paymentCard, setPaymentCard] = useState({
         number: '1234568989457710',
         name: 'Erlin Banegas',
@@ -38,8 +41,11 @@ const Payment = ({open, onClose}) => {
         setPaymentCard({...paymentCard, focus: prop});
     }
 
+    const handleRegisterPaymentCard = () => {
+        onRegisterPaymetCard(paymentCard);
+    }
+
     return (
-        <ModalControl open={open} onClose={onClose} width="300px">
             <PaymentStyled>
 
                 <h2>Registro Tarjeta</h2>
@@ -82,11 +88,10 @@ const Payment = ({open, onClose}) => {
                     />
                 </div>
 
-                <Button variant="contained" color="primary">Registrar</Button>
+                <Button variant="contained" color="primary" onClick={handleRegisterPaymentCard}>Registrar</Button>
             </PaymentStyled>
-        </ModalControl>
     )
 }
 
 
-export default Payment;
+export default PaymentControl;

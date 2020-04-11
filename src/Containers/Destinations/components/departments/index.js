@@ -203,12 +203,12 @@ const Departments = () => {
                 <Typography gutterBottom variant="h5" component="h2">
                     {selectedItem.name}
                 </Typography>
-            <DestinationsDetailStyled>
-                {
-                    selectedItem.destinations.map(destination => 
-                    <DestinationItem item={destination} onClick={handleClick} />)
-                }
-            </DestinationsDetailStyled>
+                <DestinationsDetailStyled>
+                    {
+                        selectedItem.destinations.map(destination => 
+                        <DestinationItem item={destination} onClick={handleClick} />)
+                    }
+                </DestinationsDetailStyled>
             </ModalControl>}
         </DepartmentsStyled>
     )

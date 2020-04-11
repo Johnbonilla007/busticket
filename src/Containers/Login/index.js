@@ -74,7 +74,7 @@ const Login = ({history}) => {
     }
 
     const handleEnterClick = () => {
-        if(user.userName === 'busticket' && user.password === '1234'){
+        if(user.userName === '' && user.password === ''){
             history.push('/home');
         }
     }
@@ -89,7 +89,7 @@ const Login = ({history}) => {
                     <img src={logo} />
 
                     <div>
-                        <Typography>Usuario (Este es un Test)</Typography>
+                        <Typography>Usuario</Typography>
                         <TextFieldControl onChange={handleChange('userName')} />
 
                         <Typography>Contraseña</Typography>
