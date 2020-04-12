@@ -12,8 +12,15 @@ const useStyles = makeStyles((theme) => ({
   root: {
     width: '100%',
   },
+  stepper: {
+    backgroundColor: 'black',
+  },
   button: {
     marginRight: theme.spacing(1),
+  },
+  buttonBack: {
+    marginRight: theme.spacing(1),
+    background: 'gray',
   },
   completed: {
     display: 'inline-block',
@@ -37,7 +44,7 @@ function getStepContent(step) {
   }
 }
 
-const StepperControl = ({manual, showControl, onControl, steps, activeStep}) => {
+const StepperControl = ({ manual, showControl, onControl, steps, activeStep }) => {
   const classes = useStyles();
   const [activeStepIndex, setActiveStep] = React.useState(activeStep);
   const [completed, setCompleted] = React.useState({});
@@ -64,11 +71,11 @@ const StepperControl = ({manual, showControl, onControl, steps, activeStep}) => 
     const newActiveStep =
       isLastStep() && !allStepsCompleted()
         ? // It's the last step, but not all steps have been completed,
-          // find the first step that has been completed
-          stepsTemp.findIndex((step, i) => !(i in completed))
+        // find the first step that has been completed
+        stepsTemp.findIndex((step, i) => !(i in completed))
         : activeStep + 1;
 
-    if(manual){
+    if (manual) {
       onControl(newActiveStep);
       return;
     }
@@ -77,7 +84,7 @@ const StepperControl = ({manual, showControl, onControl, steps, activeStep}) => 
   };
 
   const handleBack = () => {
-    if(manual){
+    if (manual) {
       onControl(activeStep - 1);
       return;
     }
@@ -102,16 +109,16 @@ const StepperControl = ({manual, showControl, onControl, steps, activeStep}) => 
 
   return (
     <div className={classes.root}>
-      <Stepper nonLinear activeStep={activeStep}>
+      <Stepper className={classes.stepper} nonLinear activeStep={activeStep}>
         {stepsTemp.map((label, index) => (
-          <Step key={label}>
-            <StepButton onClick={handleStep(index)} completed={completed[index]}>
-              {label}
+          <Step className={classes.step} key={label}>
+            <StepButton className={classes.stepButton} onClick={handleStep(index)} completed={completed[index]}>
+              <span style={{ color: '#ffffff' }}>{label}</span>
             </StepButton>
           </Step>
         ))}
       </Stepper>
-      <div style={{display: 'grid', height: 'calc(100% - 70px)' }}>
+      <div style={{ display: 'grid', height: 'calc(100% - 70px)' }}>
         {allStepsCompleted() ? (
           <div>
             <Typography className={classes.instructions}>
@@ -120,37 +127,37 @@ const StepperControl = ({manual, showControl, onControl, steps, activeStep}) => 
             <Button onClick={handleReset}>Reset</Button>
           </div>
         ) : (
-          <div style={{display: 'grid', gridTemplateRows: showControl ? 'calc(100% - 50px)' : '100%'}}>
-             <div style={{height: '100%'}}>
-              {steps[activeStep].component}
-            </div>
-            {showControl ? 
-              (<div>
-                <Button disabled={activeStep === 0} onClick={handleBack} className={classes.button}>
-                  Back
-                </Button>
-                <Button
-                  variant="contained"
-                  color="primary"
-                  onClick={handleNext}
-                  className={classes.button}
-                >
-                  Next
-                </Button>
-                {activeStep !== stepsTemp.length &&
-                  (completed[activeStep] ? (
-                    <Typography variant="caption" className={classes.completed}>
-                      Step {activeStep + 1} already completed
-                    </Typography>
-                  ) : (
-                    <Button variant="contained" color="primary" onClick={handleComplete}>
-                      {completedSteps() === totalSteps() - 1 ? 'Finish' : 'Complete Step'}
-                    </Button>
-                  ))}
+            <div style={{ display: 'grid', gridTemplateRows: showControl ? 'calc(100% - 50px)' : '100%' }}>
+              <div style={{ height: '100%' }}>
+                {steps[activeStep].component}
               </div>
-              ) : null }
-          </div>
-        )}
+              {showControl ?
+                (<div>
+                  <Button disabled={activeStep === 0} variant="contained" onClick={handleBack} className={classes.button1}>
+                    Back
+                </Button>
+                  <Button
+                    variant="contained"
+                    color="primary"
+                    onClick={handleNext}
+                    className={classes.button}
+                  >
+                    Next
+                </Button>
+                  {activeStep !== stepsTemp.length &&
+                    (completed[activeStep] ? (
+                      <Typography variant="caption" className={classes.completed}>
+                        Step {activeStep + 1} already completed
+                    </Typography>
+                    ) : (
+                        <Button variant="contained" color="primary" onClick={handleComplete}>
+                          {completedSteps() === totalSteps() - 1 ? 'Finish' : 'Complete Step'}
+                        </Button>
+                      ))}
+                </div>
+                ) : null}
+            </div>
+          )}
       </div>
     </div>
   );

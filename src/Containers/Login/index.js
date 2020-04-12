@@ -16,6 +16,8 @@ const ContainerStyled = styled.div`
     align-items: center;
     height: 100%;
 
+    background: black;
+
     .login {
         display: flex;
         justify-content: center;

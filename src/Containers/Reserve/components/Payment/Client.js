@@ -1,7 +1,9 @@
 import React from 'react';
 import styled from 'styled-components';
 
-const ClientStyled = styled.div``;
+const ClientStyled = styled.div`
+    color: #ffffff;
+`;
 
 const Client = ({client}) => {
 

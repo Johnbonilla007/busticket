@@ -18,6 +18,8 @@ const ContainerMainStyled = styled.div`
         left: 0px;
         bottom: 0px;
         padding: 5px;
+
+        background: black;
     }
 `;
 

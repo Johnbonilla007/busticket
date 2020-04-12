@@ -21,6 +21,23 @@ import PersonAddIcon from '@material-ui/icons/PersonAdd';
 const useStyles = makeStyles(theme => ({
   root: {
     maxWidth: 345,
+    background: 'black',
+    border: 'solid 1px gray',
+
+    '& .MuiCardHeader-root': {
+      color: 'white',
+
+      '& .MuiCardHeader-action': {
+        '& .MuiIconButton-root': {
+          color: 'white',
+        }
+      }
+    },
+
+    '& .MuiTypography-body2': {
+      color: 'white',
+    }
+
   },
   media: {
     height: 0,
@@ -56,11 +73,6 @@ const CardItem = ({item, onClick}) => {
   return (
     <Card className={classes.root} onClick={() => onClick(item)}>
       <CardHeader
-        // avatar={
-        //   <Avatar aria-label="recipe" className={classes.avatar}>
-        //     R
-        //   </Avatar>
-        // }
         action={
           <IconButton aria-label="settings">
             <MoreVertIcon />
@@ -75,31 +87,11 @@ const CardItem = ({item, onClick}) => {
         title={item.title}
       />
 
-      {/* <img src={item.pathIcon} /> */}
-
       <CardContent>
         <Typography variant="body2" color="textSecondary" component="p">
           {item.description}
         </Typography>
       </CardContent>
-      {/* <CardActions disableSpacing>
-        <IconButton aria-label="add to favorites">
-          <FavoriteIcon />
-        </IconButton>
-        <IconButton aria-label="share">
-          <ShareIcon />
-        </IconButton>
-        <IconButton
-          className={clsx(classes.expand, {
-            [classes.expandOpen]: expanded,
-          })}
-          onClick={handleExpandClick}
-          aria-expanded={expanded}
-          aria-label="show more"
-        >
-          <ExpandMoreIcon />
-        </IconButton>
-      </CardActions> */}
     </Card>
   );
 }

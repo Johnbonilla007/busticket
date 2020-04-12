@@ -11,14 +11,16 @@ const NotificationTicketStyled = styled.div`
     display: grid;
     justify-content: center;
 
-    background-color: rgba(0, 0, 0, 0.2);
+    border: solid 1px gray;
 
     strong {
         font-size: 30px;
+        color: gray;
     }
 
     span {
         font-size: 36px;
+        color: #ffffff;
     }
 
     .center-hour {
