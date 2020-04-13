@@ -131,7 +131,16 @@ const TableControl = ({fieldKey, columns, rows, onClickRow}) => {
 
 TableControl.propTypes = {
   fieldKey: PropTypes.string, 
-  columns: PropTypes.array.isRequired, 
+  columns: [
+    PropTypes.shape(
+      { 
+        id: PropTypes.string, 
+        numeric: PropTypes.bool, 
+        disablePadding: PropTypes.bool, 
+        label: PropTypes.string, 
+      }
+    ),
+  ], 
   rows: PropTypes.array.isRequired, 
   onClickRow: PropTypes.func,
 }

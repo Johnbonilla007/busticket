@@ -1,0 +1,85 @@
+{
+  "login": [
+    {
+      "id": 0,
+      "userName": "Erlin",
+      "password": "1234",
+      "access": [
+        "reserveTicket"
+      ]
+    },
+    {
+      "id": 1,
+      "userName": "busticket-admin",
+      "password": "admin1234",
+      "access": [
+        "clients",
+        "reserveTicket",
+        "travelCatalogs",
+        "destinations"
+      ]
+    }
+  ],
+  "clients": [],
+  "reserveTicket": [],
+  "travelCatalogs": [
+    {
+      "travelCatalogId": 1,
+      "destinationId": 1,
+      "transportationUnitId": 1,
+      "outputHour": "06:00 AM",
+      "endTimeApprox": "09:00 AM"
+    }
+  ],
+  "destinations": [
+    {
+      "id": 1,
+      "destinationId": 1,
+      "name": "La Ceiba",
+      "destinationDepartment": "Atlántida",
+      "destinationCity": "La Ceiba",
+      "img": "laCeiba"
+    },
+    {
+      "name": "San Pedro Sula",
+      "destinationDepartment": "Atlantida",
+      "destinationCity": "Roma",
+      "id": 3
+    },
+    {
+      "name": "Villanueva",
+      "destinationDepartment": "Cortes",
+      "destinationCity": "SPS",
+      "id": 4
+    }
+  ],
+  "transportationUnit": [
+    {
+      "transportationUnitId": 1,
+      "motoristId": 1,
+      "unitTypeId": 1,
+      "transportationUnitNo": "A-31",
+      "capacity": 52,
+      "capacityRow": 23,
+      "availableSeats": 52
+    }
+  ],
+  "unitType": [
+    {
+      "unitTypeId": 1,
+      "category": "Ejecutivo",
+      "description": "Ejecutivo",
+      "state": 1
+    }
+  ],
+  "motorist": [
+    {
+      "motoristId": 1,
+      "name": "Erlin",
+      "identity": "0512199601283",
+      "edad": 24,
+      "genero": "M",
+      "phone": "99155949"
+    }
+  ]
+}

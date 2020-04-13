@@ -1,4 +1,4 @@
-import React, {useState} from 'react';
+import React, {useState, useEffect} from 'react';
 import styled from 'styled-components';
 
 import Typography from '@material-ui/core/Typography';
@@ -9,6 +9,7 @@ import BackgroundMain from '../../BackgroundMain/main';
 
 import logo from '../../logo.jpg';
 import { utils } from '../../utils';
+import { restClient } from '../../services/restClient';
 
 const ContainerStyled = styled.div`
     display: flex;
@@ -51,7 +52,7 @@ const Login = ({history}) => {
     const [user, setUser] = useState({
         userName: '',
         password: '',
-    })
+    });
 
     const onSucccess = position => {
         // location = position;
@@ -75,8 +76,13 @@ const Login = ({history}) => {
         setUser({...user, [prop]: value});
     }
 
-    const handleEnterClick = () => {
-        if(user.userName === '' && user.password === ''){
+    const handleEnterClick = async () => {
+
+        const response = await restClient.httpLoginAcces('login', user);
+
+        debugger
+
+        if(response){
             history.push('/home');
         }
     }

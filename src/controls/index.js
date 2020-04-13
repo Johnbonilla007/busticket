@@ -6,6 +6,7 @@ import FormattedInput from './FormattedInput';
 import TextFieldControl from './TextField';
 import ModalControl from './ModalControl';
 import PopoverControl from './Popover';
+import PanelControl from './PanelControl';
 
 export {
     TableControl,
@@ -15,5 +16,6 @@ export {
     FormattedInput,
     TextFieldControl,
     ModalControl,
-    PopoverControl
+    PopoverControl,
+    PanelControl,
 }
