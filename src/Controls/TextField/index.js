@@ -12,10 +12,10 @@ import VisibilityOff from '@material-ui/icons/VisibilityOff';
 
 import { useTextFieldStyles } from './style';
 
-const TextFieldControl = ({typeField, prefix, label, onChange, onFocus, maxLength, theme }) => {
+const TextFieldControl = ({typeField, initialValue, prefix, label, onChange, onFocus, maxLength, theme }) => {
   const classes = useTextFieldStyles(theme);
   
-  const [value, setValue] = useState('');
+  const [value, setValue] = useState(initialValue);
   const [showPassword, setShowPassword] = useState(false);
 
   const handleChange = (event) => {
@@ -96,6 +96,7 @@ const TextFieldControl = ({typeField, prefix, label, onChange, onFocus, maxLengt
                         onFocus={onFocus}
                         className={clsx(classes.margin, classes.textField)} 
                         inputProps={{ maxLength }}
+                        value={value}
                     />;
     }
   }

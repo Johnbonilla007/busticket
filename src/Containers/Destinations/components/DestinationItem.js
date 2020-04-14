@@ -3,6 +3,7 @@ import styled from 'styled-components';
 import {TextFieldControl} from '../../../Controls';
 import {Button} from '@material-ui/core';
 import { restClient } from '../../../services/restClient';
+import { utils } from '../../../utils';
 
 const DestinationItemStyled = styled.div`
     display: grid;
@@ -11,7 +12,7 @@ const DestinationItemStyled = styled.div`
 `;
 
 
-const DestinationItem = ({item}) => {
+const DestinationItem = ({item, isEditing, fetchDestinarions}) => {
     const [destination, setDestination] = useState(item);
 
     const handleChange = prop => value => {
@@ -19,16 +20,45 @@ const DestinationItem = ({item}) => {
     }
 
     const handleAddDestinationClick = async () => {
-        const response = await restClient.httpPost('destinations', destination);
+        let response;
+
+        if(isEditing){
+            response = await restClient.httpPut('destinations', destination);
+        }else{
+            response = await restClient.httpPost('destinations', destination);
+        }
+
+        if(response === 'success' || utils.evaluateObject(response)){
+            fetchDestinarions();
+        }
     }
 
     return (
         <DestinationItemStyled>
-            <TextFieldControl label="Origen" onChange={handleChange('name')} />
-            <TextFieldControl label="Destination Department" onChange={handleChange('destinationDepartment')} />
-            <TextFieldControl label="Destination City" onChange={handleChange('destinationCity')} />
+            <TextFieldControl 
+                initialValue={isEditing ? destination.name : ''} 
+                label="Origen" 
+                onChange={handleChange('name')} 
+            />
 
-            <Button variant="contained" color="primary" onClick={handleAddDestinationClick} >Add</Button>
+            <TextFieldControl 
+                initialValue={isEditing ? destination.destinationDepartment : ''} 
+                label="Destination Department" 
+                onChange={handleChange('destinationDepartment')} 
+            />
+            
+            <TextFieldControl 
+                initialValue={isEditing ? destination.destinationCity : ''} 
+                label="Destination City" 
+                onChange={handleChange('destinationCity')} 
+            />
+
+            <Button 
+                variant="contained" 
+                color="primary" 
+                onClick={handleAddDestinationClick} >
+                Add
+            </Button>
         </DestinationItemStyled>
     )
 }

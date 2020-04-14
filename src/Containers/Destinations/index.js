@@ -11,6 +11,8 @@ import { utils } from '../../utils';
 
 const DestinationsStyled = styled.div`
     overflow: auto;
+    display: grid;
+    grid-template-rows: 60px 80px 40px calc(100% - 180px);
 
     h2 {
         color: white;
@@ -22,14 +24,14 @@ const Destinations = () => {
     const [destinationsFilters, setDestinationsFilters] = useState([]);
 
     useEffect(() => {
-        const fetchDestinarions = async () => {
-            const response = await restClient.httpGet('destinations');
-
-            setDestinations(response);
-        }
-
         fetchDestinarions();
     }, []);
+
+    const fetchDestinarions = async () => {
+        const response = await restClient.httpGet('destinations');
+
+        setDestinations(response);
+    }
 
     const handleSearchDestinationChange = value => {
         const filters = destinations.filter(item => item.name.toUpperCase().includes(value.toUpperCase()));
@@ -54,6 +56,12 @@ const Destinations = () => {
         return <Button variant="contained" color="secondary" onClick={handleDeleleClick(row)}> Delete </Button>
     }
 
+    const onRenderCellEdit = row => {
+        return <PanelControl anchor="right" label="Edit" title="Edit Destination">
+                    <DestinationItem item={row} isEditing fetchDestinarions={fetchDestinarions} />
+                </PanelControl>
+    }
+
     return (
         <DestinationsStyled>
             <h2>Destinations</h2>
@@ -62,7 +70,7 @@ const Destinations = () => {
             <TextFieldControl theme="oscuro" label="Search Destination" onChange={handleSearchDestinationChange} />
 
             <PanelControl anchor="right" label="Add Destination" title="Add Destination">
-                <DestinationItem />
+                <DestinationItem fetchDestinarions={fetchDestinarions}/>
             </PanelControl>
 
             <TableControl
@@ -71,6 +79,10 @@ const Destinations = () => {
                 columns={
                     [
                         {
+                            onRenderCell: onRenderCellEdit,
+                            minWidth: 30,
+                        },
+                        {
                             onRenderCell: onRenderCellDelete,
                         },
                         {
@@ -78,6 +90,7 @@ const Destinations = () => {
                             numeric: false,
                             disablePadding: false,
                             label: "Destino Id",
+                            minWidth: 10,
                         },
                         {
                             id: 'name',

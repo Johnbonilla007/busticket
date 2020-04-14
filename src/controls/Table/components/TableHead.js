@@ -18,13 +18,17 @@ const TableHeader = ({classes, onSelectAllClick, order, orderBy, numSelected, ro
             <TableCell
               key={headCell.id}
               align="left"
+              // style={{minWidth: headCell.minWidth || 100, width: headCell.width || 100 }}
+              style={{minWidth: 10, width: 100}}
               padding={headCell.disablePadding ? 'none' : 'default'}
               sortDirection={orderBy === headCell.id ? order : false}
+              // size="small"
             >
 
             {headCell.onRenderHeader ? headCell.onRenderHeader() : null}
 
-              <TableSortLabel
+            {headCell.label && 
+            (<TableSortLabel
                 active={orderBy === headCell.id}
                 direction={orderBy === headCell.id ? order : 'asc'}
                 onClick={createSortHandler(headCell.id)}
@@ -35,7 +39,8 @@ const TableHeader = ({classes, onSelectAllClick, order, orderBy, numSelected, ro
                     {order === 'desc' ? 'sorted descending' : 'sorted ascending'}
                   </span>
                 ) : null}
-              </TableSortLabel>
+              </TableSortLabel>)}
+
             </TableCell>
           ))}
         </TableRow>

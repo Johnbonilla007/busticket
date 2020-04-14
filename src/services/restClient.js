@@ -25,7 +25,7 @@ export class restClient {
   }
 
   static httpPut = (url, param) => {
-    return fetch(`${urlBase}/${url}`, {
+    return fetch(`${urlBase}/${url}/${param.id}`, {
                                         method: 'PUT',
                                         headers: {
                                           'Accept': 'application/json',

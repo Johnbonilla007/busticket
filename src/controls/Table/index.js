@@ -66,6 +66,7 @@ const TableControl = ({fieldKey, columns, rows, onClickRow}) => {
         {/* <TableToolbar numSelected={selected.length} /> */}
         <TableContainer>
           <Table
+            stickyHeader
             className={classes.table}
             aria-labelledby="tableTitle"
             size={dense ? 'small' : 'medium'}
@@ -103,11 +104,11 @@ const TableControl = ({fieldKey, columns, rows, onClickRow}) => {
                     </TableRow>
                   );
                 })}
-              {emptyRows > 0 && (
+              {/* {emptyRows > 0 && (
                 <TableRow style={{ height: (dense ? 33 : 53) * emptyRows }}>
                   <TableCell colSpan={6} />
                 </TableRow>
-              )}
+              )} */}
             </TableBody>
           </Table>
         </TableContainer>
@@ -121,6 +122,8 @@ const TableControl = ({fieldKey, columns, rows, onClickRow}) => {
           onChangeRowsPerPage={handleChangeRowsPerPage}
         />
       </Paper>
+
+
       <FormControlLabel
         control={<Switch checked={dense} onChange={handleChangeDense} />}
         label="Dense padding"
