@@ -2,7 +2,7 @@ import React from 'react';
 import styled from 'styled-components';
 
 const ClientStyled = styled.div`
-    color: #ffffff;
+    /* color: #ffffff; */
 `;
 
 const Client = ({client}) => {

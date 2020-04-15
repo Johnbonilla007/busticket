@@ -13,7 +13,7 @@ const useStyles = makeStyles((theme) => ({
     width: '100%',
   },
   stepper: {
-    backgroundColor: 'black',
+    // backgroundColor: 'black',
   },
   button: {
     marginRight: theme.spacing(1),
@@ -113,7 +113,7 @@ const StepperControl = ({ manual, showControl, onControl, steps, activeStep }) =
         {stepsTemp.map((label, index) => (
           <Step className={classes.step} key={label}>
             <StepButton className={classes.stepButton} onClick={handleStep(index)} completed={completed[index]}>
-              <span style={{ color: '#ffffff' }}>{label}</span>
+              <span>{label}</span>
             </StepButton>
           </Step>
         ))}
