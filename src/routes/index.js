@@ -5,10 +5,11 @@ import Reserve from "../Containers/Reserve";
 import Motorist from "../Containers/Motorist";
 
 
-import addClient from '../Dashboard/img/addClient.png'
-import ticket from '../Dashboard/img/ticket.png'
-import destinations from '../Dashboard/img/destinations.png'
-import schedule from '../Dashboard/img/schedule.png'
+import addClient from '../Dashboard/img/addClient.png';
+import ticket from '../Dashboard/img/ticket.png';
+import destinations from '../Dashboard/img/destinations.png';
+import schedule from '../Dashboard/img/schedule.png';
+import motorists from '../Dashboard/img/motorists.jpg';
 
 
 export const routes = [
@@ -43,9 +44,9 @@ export const routes = [
     },
     {
         path: "/home/motorist",
-        title: 'Motorists',
+        title: 'Conductores',
         component: Motorist,
-        pathIcon: schedule,
+        pathIcon: motorists,
         description: 'Conductores De Buses'
     },
 ];
