@@ -5,62 +5,62 @@ import {Button} from '@material-ui/core';
 import { restClient } from '../../../services/restClient';
 import { utils } from '../../../utils';
 
-const MotoristItemStyled = styled.div`
+const UnitTypeItemStyled = styled.div`
     display: grid;
     grid-template-rows: 100px 100px 100px 100px 100px;
     width: 600px;
 `;
 
 
-const MotoristItem = ({item, isEditing, fetchMotorists, url}) => {
-    const [motorist, setMotorist] = useState(item);
+const UnitTypeItem = ({item, isEditing, fetchUnitTypes, url}) => {
+    const [unitType, setUnitType] = useState(item);
 
     const handleChange = prop => value => {
-        setMotorist({...motorist, [prop]: value});
+        setUnitType({...unitType, [prop]: value});
     }
 
-    const handleAddMotoristClick = async () => {
+    const handleAddUnitTypeClick = async () => {
         let response;
 
         if(isEditing){
-            response = await restClient.httpPut(url, motorist);
+            response = await restClient.httpPut(url, unitType);
         }else{
-            response = await restClient.httpPost(url, motorist);
+            response = await restClient.httpPost(url, unitType);
         }
 
         if(response === 'success' || utils.evaluateObject(response)){
-            fetchMotorists();
+            fetchUnitTypes();
         }
     }
 
     return (
-        <MotoristItemStyled>
+        <UnitTypeItemStyled>
             <TextFieldControl 
-                initialValue={isEditing ? motorist.name : ''} 
+                initialValue={isEditing ? unitType.name : ''} 
                 label="Nombre Condutor" 
                 onChange={handleChange('name')} 
             />
 
             <TextFieldControl 
-                initialValue={isEditing ? motorist.identity : ''} 
+                initialValue={isEditing ? unitType.identity : ''} 
                 label="Identidad" 
                 onChange={handleChange('identity')} 
             />
             
             <TextFieldControl 
-                initialValue={isEditing ? motorist.age : ''} 
+                initialValue={isEditing ? unitType.age : ''} 
                 label="Edad" 
                 onChange={handleChange('age')} 
             />
 
             <TextFieldControl 
-                initialValue={isEditing ? motorist.genero : ''} 
+                initialValue={isEditing ? unitType.genero : ''} 
                 label="genero" 
                 onChange={handleChange('genero')} 
             />
 
             <TextFieldControl 
-                initialValue={isEditing ? motorist.phone : ''} 
+                initialValue={isEditing ? unitType.phone : ''} 
                 label="Telefono" 
                 onChange={handleChange('phone')} 
             />
@@ -68,11 +68,11 @@ const MotoristItem = ({item, isEditing, fetchMotorists, url}) => {
             <Button 
                 variant="contained" 
                 color="primary" 
-                onClick={handleAddMotoristClick} >
+                onClick={handleAddUnitTypeClick} >
                 Add
             </Button>
-        </MotoristItemStyled>
+        </UnitTypeItemStyled>
     )
 }
 
-export default MotoristItem;
+export default UnitTypeItem;

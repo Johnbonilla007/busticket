@@ -166,10 +166,16 @@
   ],
   "unitType": [
     {
-      "unitTypeId": 1,
+      "id": 1,
       "category": "Ejecutivo",
       "description": "Ejecutivo",
       "state": 1
+    },
+    {
+      "category": "executive",
+      "description": "Ejecutivo",
+      "state": "Activo",
+      "id": 2
     }
   ],
   "motorist": [

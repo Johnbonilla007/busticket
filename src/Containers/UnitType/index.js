@@ -7,9 +7,7 @@ import {Button} from '@material-ui/core';
 
 import { restClient } from '../../services/restClient';
 import { utils } from '../../utils';
-import UnitTypeItem from './components/MotoristItem';
-import Dashboard from '../../Dashboard';
-import MenuScreen from '../../Controls/MenuScreen';
+import UnitTypeItem from './components/UnitTypeItem';
 
 const MotoristStyled = styled.div`
     overflow: auto;
@@ -21,35 +19,31 @@ const MotoristStyled = styled.div`
     }
 `;
 
-const Motorist = (props) => {
-    const [motorists, setMotorists] = useState([]);
-    const [motoristsFilters, setMotoristsFilters] = useState([]);
+const UnitType = () => {
+    const [unitTypes, setUnitTypes] = useState([]);
+    const [unitTypeFilters, setUnitTypeFilters] = useState([]);
 
-    const url = 'motorist';
+    const url = 'unitType';
 
     useEffect(() => {
-        fetchMotorists();
+        fetchUnitTypes();
     }, []);
 
-    const fetchMotorists = async () => {
+    const fetchUnitTypes = async () => {
         const response = await restClient.httpGet(url);
 
-        setMotorists(response);
+        setUnitTypes(response);
     }
 
-    const handleSearchMotoristChange = value => {
-        const filters = motorists.filter(item => item.name.toUpperCase().includes(value.toUpperCase()));
+    const handleSearchUnitTypesChange = value => {
+        const filters = unitTypes.filter(item => item.name.toUpperCase().includes(value.toUpperCase()));
 
         if(utils.evaluateArray(filters)){
-            setMotoristsFilters(filters);
+            setUnitTypeFilters(filters);
             return;
         }
 
-        setMotoristsFilters([]);
-    }
-
-    const handleAddDestinationClick = () => {
-
+        setUnitTypeFilters([]);
     }
 
     const handleDeleleClick = row => async () => {
@@ -62,23 +56,23 @@ const Motorist = (props) => {
 
     const onRenderCellEdit = row => {
         return <PanelControl anchor="right" label="Edit" title="Edit Destination">
-                    <UnitTypeItem item={row} isEditing fetchMotorists={fetchMotorists} url={url} />
+                    <UnitTypeItem item={row} isEditing fetchUnitTypes={fetchUnitTypes} url={url} />
                 </PanelControl>
     }
 
     return (
         <MotoristStyled>
-            <h2>Motorists</h2>
+            <h2>Unit Types</h2>
 
-            <TextFieldControl theme="oscuro" label="Search Destination" onChange={handleSearchMotoristChange} />
+            <TextFieldControl theme="oscuro" label="Search Destination" onChange={handleSearchUnitTypesChange} />
 
             <PanelControl anchor="right" label="Add Destination" title="Add Destination">
-                <UnitTypeItem fetchMotorists={fetchMotorists} url={url} />
+                <UnitTypeItem fetchUnitTypes={fetchUnitTypes} url={url} />
             </PanelControl>
 
             <TableControl
                 fieldKey="destinationId"
-                rows={utils.evaluateArray(motoristsFilters) ? motoristsFilters : motorists}
+                rows={utils.evaluateArray(unitTypeFilters) ? unitTypeFilters : unitTypes}
                 columns={
                     [
                         {
@@ -96,42 +90,28 @@ const Motorist = (props) => {
                             minWidth: 10,
                         },
                         {
-                            id: 'name',
+                            id: 'category',
                             numeric: false,
                             disablePadding: false,
-                            label: "Nombre",
+                            label: "Categoria",
                         },
                         {
-                            id: 'identity',
+                            id: 'description',
                             numeric: false,
                             disablePadding: false,
-                            label: "Identidad",
+                            label: "Descripción",
                         },
                         {
-                            id: 'age',
+                            id: 'state',
                             numeric: false,
                             disablePadding: false,
-                            label: "Edad",
+                            label: "Estado",
                         },
-                        {
-                            id: 'genero',
-                            numeric: false,
-                            disablePadding: false,
-                            label: "Genero",
-                        },
-                        {
-                            id: 'phone',
-                            numeric: false,
-                            disablePadding: false,
-                            label: "Telefono",
-                        }
                     ]
                 }
             />
-
-            {/* <DestinationItem /> */}
         </MotoristStyled>
     )
 }
 
-export default Motorist;
+export default UnitType;

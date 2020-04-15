@@ -6,9 +6,11 @@ import { routes } from '../routes';
 import { utils } from '../utils';
 import {ModalControl} from '../Controls';
 import NotificationTicket from './components/NotificationTicket';
+import MenuScreen from '../Controls/MenuScreen';
 
 const DashboardStyled = styled.div`
     opacity: 90%;
+    display: grid;
 `;
 
 const Dashboard = ({history, match}) => {
@@ -39,21 +41,24 @@ const Dashboard = ({history, match}) => {
         
     }
 
-    
+    const width = history.location.pathname === '/home' ? 300 : 200;
+    const height = history.location.pathname === '/home' ? 200 : 120;
     
     return <DashboardStyled> 
                 <Cards items={routes} onRenderItem={renderModule} onClick={selectedItem} />
+                
+                {/* <MenuScreen width={width} height={height} /> */}
 
-                <NotificationTicket />
+                {/* <NotificationTicket /> */}
 
-                <ModalControl
+                {/* <ModalControl
                     open={open}
                     onClose={handleOpenOnClick}
                     aria-labelledby="simple-modal-title"
                     aria-describedby="simple-modal-description"
                 >
                     {utils.evaluateObject(item) && <div>{getComponent()}</div>}
-                </ModalControl>
+                </ModalControl> */}
             </DashboardStyled>
 }
 

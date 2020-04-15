@@ -10,15 +10,16 @@ const useStyles = makeStyles((theme) => ({
   formControl: {
     margin: theme.spacing(1),
     minWidth: 120,
+    width: '97%',
   },
   selectEmpty: {
     marginTop: theme.spacing(2),
   },
 }));
 
-const Combobox = ({label, options, onChange}) => {
+const Combobox = ({selectedKey, label, options, onChange}) => {
   const classes = useStyles();
-  const [value, setValue] = React.useState('');
+  const [value, setValue] = React.useState(selectedKey);
 
   const handleChange = (event) => {
     setValue(event.target.value);

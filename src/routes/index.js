@@ -3,6 +3,8 @@ import Destinations from "../Containers/Destinations";
 import Schedule from "../Containers/Schedule";
 import Reserve from "../Containers/Reserve";
 import Motorist from "../Containers/Motorist";
+import UnitType from "../Containers/UnitType";
+import Test from "../Containers/Tests";
 
 
 import addClient from '../Dashboard/img/addClient.png';
@@ -48,5 +50,19 @@ export const routes = [
         component: Motorist,
         pathIcon: motorists,
         description: 'Conductores De Buses'
+    },
+    {
+        path: "/home/unit-type",
+        title: 'Unit Types',
+        component: UnitType,
+        pathIcon: motorists,
+        description: 'Tipos de Unidades'
+    },
+    {
+        path: "/home/test",
+        title: 'Test',
+        component: Test,
+        pathIcon: motorists,
+        description: 'Este es un test de control'
     },
 ];
