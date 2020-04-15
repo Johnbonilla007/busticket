@@ -33,14 +33,6 @@
   ],
   "destinations": [
     {
-      "id": 1,
-      "destinationId": 1,
-      "name": "Tegucigalpa",
-      "destinationDepartment": "Atlántida",
-      "destinationCity": "La Ceiba",
-      "img": "laCeiba"
-    },
-    {
       "name": "San Pedro Sula",
       "destinationDepartment": "Atlantida",
       "destinationCity": "Roma",
@@ -182,12 +174,20 @@
   ],
   "motorist": [
     {
-      "motoristId": 1,
+      "name": "Samir",
+      "identity": "0512199601283",
+      "age": "24",
+      "genero": "M",
+      "phone": "99155949",
+      "id": 2
+    },
+    {
       "name": "Erlin",
       "identity": "0512199601283",
-      "edad": 24,
+      "age": "26",
       "genero": "M",
-      "phone": "99155949"
+      "phone": "99155949",
+      "id": 3
     }
   ]
 }

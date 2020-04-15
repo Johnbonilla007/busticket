@@ -2,6 +2,7 @@ import Client from "../Containers/Client";
 import Destinations from "../Containers/Destinations";
 import Schedule from "../Containers/Schedule";
 import Reserve from "../Containers/Reserve";
+import Motorist from "../Containers/Motorist";
 
 
 import addClient from '../Dashboard/img/addClient.png'
@@ -39,5 +40,12 @@ export const routes = [
         component: Schedule,
         pathIcon: schedule,
         description: 'Horarios Inicio / Final'
+    },
+    {
+        path: "/home/motorist",
+        title: 'Motorists',
+        component: Motorist,
+        pathIcon: schedule,
+        description: 'Conductores De Buses'
     },
 ];
