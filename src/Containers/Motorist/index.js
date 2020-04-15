@@ -15,10 +15,6 @@ const MotoristStyled = styled.div`
     overflow: auto;
     display: grid;
     grid-template-rows: 60px 80px 40px calc(100% - 180px);
-
-    h2 {
-        color: white;
-    }
 `;
 
 const Motorist = (props) => {
@@ -70,7 +66,7 @@ const Motorist = (props) => {
         <MotoristStyled>
             <h2>Motorists</h2>
 
-            <TextFieldControl theme="oscuro" label="Search Destination" onChange={handleSearchMotoristChange} />
+            <TextFieldControl label="Search Destination" onChange={handleSearchMotoristChange} />
 
             <PanelControl anchor="right" label="Add Destination" title="Add Destination">
                 <UnitTypeItem fetchMotorists={fetchMotorists} url={url} />

@@ -5,8 +5,8 @@ import CardItem from './CardItem';
 
 const CardsStyled = styled.div`
     display: grid;
-    grid-template-columns: repeat(auto-fit, 300px);
-    grid-template-rows: repeat(auto-fit, 300px);
+    grid-template-columns: repeat(auto-fit, 230px);
+    grid-template-rows: repeat(auto-fit, 200px);
     grid-column-gap: 5px;
     width: 100%;
     justify-content: center;

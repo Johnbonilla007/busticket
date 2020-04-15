@@ -13,10 +13,6 @@ const DestinationsStyled = styled.div`
     overflow: auto;
     display: grid;
     grid-template-rows: 60px 80px 40px calc(100% - 180px);
-
-    h2 {
-        color: white;
-    }
 `;
 
 const Destinations = () => {
@@ -65,9 +61,8 @@ const Destinations = () => {
     return (
         <DestinationsStyled>
             <h2>Destinations</h2>
-            {/* <Departments /> */}
 
-            <TextFieldControl theme="oscuro" label="Search Destination" onChange={handleSearchDestinationChange} />
+            <TextFieldControl label="Search Destination" onChange={handleSearchDestinationChange} />
 
             <PanelControl anchor="right" label="Add Destination" title="Add Destination">
                 <DestinationItem fetchDestinarions={fetchDestinarions}/>

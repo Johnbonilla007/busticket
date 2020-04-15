@@ -14,8 +14,14 @@ const useStyles = (height, width) => {
             maxWidth: 345,
             width: width,
             height: height,
-            background: 'black',
-            // border: 'solid 1px gray',
+
+            "& .MuiCardActionArea-root": {
+                height: '100%'
+              },
+          
+              "& .MuiCardActionArea-root:hover": {
+                background: '#eeeeee',
+              },
     
             '& .MuiCardHeader-root': {
                 color: 'white',
@@ -28,7 +34,7 @@ const useStyles = (height, width) => {
             },
     
             '& .MuiTypography-body2': {
-                color: 'white',
+                // color: 'white',
             }
     
         },
@@ -36,23 +42,6 @@ const useStyles = (height, width) => {
             height: 0,
             paddingTop: '56.25%', // 16:9
         },
-        expand: {
-            transform: 'rotate(0deg)',
-            marginLeft: 'auto',
-            transition: theme.transitions.create('transform', {
-                duration: theme.transitions.duration.shortest,
-            }),
-        },
-        expandOpen: {
-            transform: 'rotate(180deg)',
-        },
-        avatar: {
-            backgroundColor: red[500],
-        },
-        img: {
-            weight: '30px',
-            height: 20
-        }
     }));
 
     return styles();
@@ -68,7 +57,7 @@ const MenuScreenItem = ({ item, onClick, height, width }) => {
     };
 
     return (
-        <Card className={classes.root} onClick={() => onClick(item)}>
+        <Card elevation={0} className={classes.root} onClick={() => onClick(item)}>
             <CardActionArea>
                 <Link href={item.path}>
                     <CardMedia

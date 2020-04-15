@@ -13,10 +13,6 @@ const MotoristStyled = styled.div`
     overflow: auto;
     display: grid;
     grid-template-rows: 60px 80px 40px calc(100% - 180px);
-
-    h2 {
-        color: white;
-    }
 `;
 
 const UnitType = () => {
@@ -64,7 +60,7 @@ const UnitType = () => {
         <MotoristStyled>
             <h2>Unit Types</h2>
 
-            <TextFieldControl theme="oscuro" label="Search Destination" onChange={handleSearchUnitTypesChange} />
+            <TextFieldControl label="Search Destination" onChange={handleSearchUnitTypesChange} />
 
             <PanelControl anchor="right" label="Add Destination" title="Add Destination">
                 <UnitTypeItem fetchUnitTypes={fetchUnitTypes} url={url} />

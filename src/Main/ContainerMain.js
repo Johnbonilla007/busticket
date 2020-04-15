@@ -11,6 +11,8 @@ import BackgroundMain from '../BackgroundMain/main';
 import MenuScreen from '../Controls/MenuScreen';
 
 const ContainerMainStyled = styled.div`
+    background: #eeeeee;
+    
     .container {
         display: grid;
         /* grid-template-rows: 120px calc(100% - 120px); */
@@ -21,7 +23,7 @@ const ContainerMainStyled = styled.div`
         bottom: 0px;
         padding: 5px;
 
-        background: black;
+        /* background: #eeeeee; */
     }
 `;
 
@@ -54,7 +56,7 @@ export const ContainerMain = ({history}) => {
                                         );
 
     return <ContainerMainStyled>
-        {/* <BackgroundMain top="70px" /> */}
+        <BackgroundMain top="70px" />
         <div className="container">
             <Header> <PrimarySearchAppBar /> </Header>
             {/* <Dashboard /> */}

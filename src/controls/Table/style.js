@@ -13,7 +13,7 @@ const useTableStyles = makeStyles(theme => ({
       },
 
       '& .MuiFormControlLabel-root': {
-        color: 'white'
+        // color: 'white'
       },
 
     },

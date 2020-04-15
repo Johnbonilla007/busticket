@@ -8,7 +8,7 @@ const HeaderStyled = styled.div`
     left: 0px;
     height: 70px;
 
-    background: black;
+    background: #eeeeee;
 `;
 
 export const Header = ({children}) => <HeaderStyled> {children} </HeaderStyled>

@@ -19,6 +19,8 @@ img.bg {
   left: 0;
 
   opacity: 90%;
+
+  z-index: 0;
 }
 
 @media screen and (max-width: 1024px) { /* Specific to this particular image */
