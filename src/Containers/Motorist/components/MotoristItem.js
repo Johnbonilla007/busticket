@@ -1,7 +1,7 @@
-import React, {useState} from 'react';
+import React, { useState } from 'react';
 import styled from 'styled-components';
-import {TextFieldControl} from '../../../Controls';
-import {Button} from '@material-ui/core';
+import { TextFieldControl } from '../../../Controls';
+import { Button } from '@material-ui/core';
 import { restClient } from '../../../services/restClient';
 import { utils } from '../../../utils';
 
@@ -24,67 +24,72 @@ const UnitTypeItemStyled = styled.div`
 `;
 
 
-const UnitTypeItem = ({item, isEditing, fetchUnitTypes, url}) => {
-    const [unitType, setUnitType] = useState(item);
+const MotoristItem = ({ item, isEditing, fetchMotorists, url }) => {
+    const [motorist, setMotorist] = useState(item);
 
     const handleChange = prop => value => {
-        setUnitType({...unitType, [prop]: value});
+        setMotorist({ ...motorist, [prop]: value });
     }
 
-    const handleAddUnitTypeClick = async () => {
-        let response;
+    const handleAddMotoristClick = async () => {
 
-        if(isEditing){
-            response = await restClient.httpPut(url, unitType);
-        }else{
-            response = await restClient.httpPost(url, unitType);
+        if (!utils.evaluateObject(motorist)) {
+            return;
         }
 
-        if(response === 'success' || utils.evaluateObject(response)){
-            fetchUnitTypes();
+        let response;
+
+        if (isEditing) {
+            response = await restClient.httpPut(url, motorist);
+        } else {
+            response = await restClient.httpPost(url, { conductor: motorist });
+        }
+
+        if (response.mensaje === 'Success' || utils.evaluateObject(response)) {
+            fetchMotorists();
         }
     }
 
     return (
         <UnitTypeItemStyled>
-            <TextFieldControl 
-                initialValue={isEditing ? unitType.nombre : ''} 
-                label="Nombre Condutor" 
-                onChange={handleChange('nombre')} 
+            <TextFieldControl
+                initialValue={isEditing ? motorist.nombre : ''}
+                label="Nombre Condutor"
+                onChange={handleChange('nombre')}
             />
 
-            <TextFieldControl 
-                initialValue={isEditing ? unitType.identidad : ''} 
-                label="Identidad" 
-                onChange={handleChange('identidad')} 
-            />
-            
-            <TextFieldControl 
-                initialValue={isEditing ? unitType.edad : ''} 
-                label="Edad" 
-                onChange={handleChange('edad')} 
+            <TextFieldControl
+                initialValue={isEditing ? motorist.identidad : ''}
+                label="Identidad"
+                onChange={handleChange('identidad')}
             />
 
-            <TextFieldControl 
-                initialValue={isEditing ? unitType.genero : ''} 
-                label="genero" 
-                onChange={handleChange('genero')} 
+            <TextFieldControl
+                initialValue={isEditing ? motorist.edad : ''}
+                label="Edad"
+                onChange={handleChange('edad')}
             />
 
-            <TextFieldControl 
-                initialValue={isEditing ? unitType.telefono : ''} 
-                label="Telefono" 
-                onChange={handleChange('telefono')} 
+            <TextFieldControl
+                initialValue={isEditing ? motorist.genero : ''}
+                label="genero"
+                onChange={handleChange('genero')}
             />
 
-            <Button 
-                variant="contained" 
-                color="primary" 
-                onClick={handleAddUnitTypeClick} >
+            <TextFieldControl
+                initialValue={isEditing ? motorist.telefono : ''}
+                label="Telefono"
+                onChange={handleChange('telefono')}
+            />
+
+            <Button
+                variant="contained"
+                color="primary"
+                onClick={handleAddMotoristClick} >
                 Add
             </Button>
         </UnitTypeItemStyled>
     )
 }
 
-export default UnitTypeItem;
+export default MotoristItem;

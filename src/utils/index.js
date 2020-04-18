@@ -1,6 +1,17 @@
+import React, {useRef} from 'react';
 import isArray from 'lodash';
 
 export class utils {
+
+  static showWait = () => {
+    const id = document.getElementById('wait-control');
+    id.className = 'wait-container show-wait';
+  }
+
+  static hiddenWait = () => {
+    const id = document.getElementById('wait-control');
+    id.className = 'wait-container hidden-wait';
+  }
 
   static getCurrentLocation = () => {
     let location = null;

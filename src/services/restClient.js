@@ -58,64 +58,90 @@ const objectParametize = (obj, q, parent) => {
 
 
 export class restClient {
-  static httpGet = (url, params) => {
+  static httpGet = (url, request) => {
 
     let query = '';
-    if(utils.evaluateObject(params)){
-      query = `&${objectParametize(params, false)}`;
+    if (utils.evaluateObject(request)) {
+      query = `&${objectParametize(request, false)}`;
     }
 
     let urlParam = `${urlBase}/${url}?format=json${query}`;
-    
+
+    utils.showWait();
     return fetch(urlParam).then(response => {
+      utils.hiddenWait();
       return response.json();
     })
-    .then(data => data)
-    .catch(error => {
+      .then(data => data)
+      .catch(error => {
 
-      return error;
-    } );
+        return error;
+      });
 
   }
 
-  static httpPost = (url, param) => {
+  static httpPost = (url, request) => {
+
+    utils.showWait();
+    return fetch(`${urlBase}/${url}`, {
+      method: 'POST',
+      headers: {
+        'Accept': 'application/json',
+        'Content-Type': 'application/json'
+      },
+      body: JSON.stringify(request)
+    }).then(response => response.json())
+      .then(data => {
+        utils.hiddenWait();
+
+        return data;
+      });
+  }
+
+  static httpPut = (url, request) => {
+
+    utils.showWait();
+
+    return fetch(`${urlBase}/${url}/${request.id}`, {
+      method: 'PUT',
+      headers: {
+        'Accept': 'application/json',
+        'Content-Type': 'application/json'
+      },
+      body: JSON.stringify(request)
+    }).then(response => response.json())
+      .then(response => {
+        utils.hiddenWait();
+        return response;
+      })
+      .catch(e => e);
+  }
+
+  static httpDelete = (url, request) => {
+
+    utils.showWait();
 
     return fetch(`${urlBase}/${url}`, {
-        method: 'POST',
-        headers: {
-          'Accept': 'application/json',
-          'Content-Type': 'application/json'
-        },
-        body: JSON.stringify(param)
-      }).then(response => response.json())
-        .then(data => data);
+      method: 'DELETE',
+      body: JSON.stringify(request),
+      headers: { 'Content-type': 'application/json' },
+    })
+      .then(response => response.json())
+      .then(response => {
+        utils.hiddenWait();
+
+        return response;
+      })
+      .catch(e => e);
   }
 
-  static httpPut = (url, param) => {
-    return fetch(`${urlBase}/${url}/${param.id}`, {
-                                        method: 'PUT',
-                                        headers: {
-                                          'Accept': 'application/json',
-                                          'Content-Type': 'application/json'
-                                        },
-                                        body: JSON.stringify(param)
-                                      }).then(() => 'success')
-                                        .catch(e => e);
-  }
-
-  static httpDelete = (url, id) => {
-    return fetch(`${urlBase}/${url}/${id}`, {method: 'DELETE'})
-                          .then(() => 'success')
-                          .catch(e => e);
-  } 
-
-  static httpLoginAcces = async (url, {userName, password}) => {
+  static httpLoginAcces = async (url, { userName, password }) => {
     const response = await restClient.httpGet(url);
-    
-    const userBusticket = response.find(user => user.userName === userName && 
-                                                user.password === password);
 
-    if(utils.evaluateObject(userBusticket)){
+    const userBusticket = response.find(user => user.userName === userName &&
+      user.password === password);
+
+    if (utils.evaluateObject(userBusticket)) {
       return userBusticket;
     }
 

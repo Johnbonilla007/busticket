@@ -1,17 +1,20 @@
-import React, {useState} from 'react';
+import React, { useState } from 'react';
 import PropTypes from 'prop-types';
 
-import Table from '@material-ui/core/Table';
-import TableBody from '@material-ui/core/TableBody';
-import TableRow from '@material-ui/core/TableRow';
-import TableCell from '@material-ui/core/TableCell';
-import TableContainer from '@material-ui/core/TableContainer';
-import TablePagination from '@material-ui/core/TablePagination';
-import Typography from '@material-ui/core/Typography';
-import Paper from '@material-ui/core/Paper';
-import Tooltip from '@material-ui/core/Tooltip';
-import FormControlLabel from '@material-ui/core/FormControlLabel';
-import Switch from '@material-ui/core/Switch';
+import {
+  Table,
+  TableBody,
+  TableRow,
+  TableCell,
+  TableContainer,
+  TablePagination,
+  Typography,
+  Paper,
+  Tooltip,
+  FormControlLabel,
+  Switch
+} from '@material-ui/core';
+
 
 import TableHeader from './components/TableHead';
 import TableToolbar from './components/TableToolBar';
@@ -19,14 +22,14 @@ import { utils } from '../../utils';
 
 import { useToolbarStyles, useTableStyles } from './style';
 
-const TableControl = ({fieldKey, columns, rows, onClickRow}) => {
+const TableControl = ({ fieldKey, columns, rows, onClickRow }) => {
   const classes = useTableStyles();
   const [order, setOrder] = useState('asc');
   const [orderBy, setOrderBy] = useState('calories');
   const [selected, setSelected] = useState([]);
   const [page, setPage] = useState(0);
   const [dense, setDense] = useState(false);
-  const [rowsPerPage, setRowsPerPage] = useState(5);
+  const [rowsPerPage, setRowsPerPage] = useState(10);
   const [selectedItem, setSelectedItem] = useState({});
 
   const handleRequestSort = (event, property) => {
@@ -36,7 +39,7 @@ const TableControl = ({fieldKey, columns, rows, onClickRow}) => {
   };
 
   const handleClick = (event, row) => {
-    if(onClickRow){
+    if (onClickRow) {
       onClickRow(row);
     }
 
@@ -64,7 +67,7 @@ const TableControl = ({fieldKey, columns, rows, onClickRow}) => {
     <div className={classes.root}>
       <Paper className={classes.paper}>
         {/* <TableToolbar numSelected={selected.length} /> */}
-        <TableContainer>
+        <TableContainer className={classes.container}>
           <Table
             stickyHeader
             className={classes.table}
@@ -99,7 +102,7 @@ const TableControl = ({fieldKey, columns, rows, onClickRow}) => {
                       selected={isItemSelected}
                     >
 
-                      {columns.map((column, columnIndex) => <TableCell key={`${row[fieldKey]}-row:${index}-column:${columnIndex}`} align="left">{column.onRenderCell ? column.onRenderCell(row) :  row[column.id]}</TableCell>)}
+                      {columns.map((column, columnIndex) => <TableCell key={`${row[fieldKey]}-row:${index}-column:${columnIndex}`} align="left">{column.onRenderCell ? column.onRenderCell(row) : row[column.id]}</TableCell>)}
 
                     </TableRow>
                   );
@@ -120,6 +123,7 @@ const TableControl = ({fieldKey, columns, rows, onClickRow}) => {
           page={page}
           onChangePage={handleChangePage}
           onChangeRowsPerPage={handleChangeRowsPerPage}
+          className={classes.pagination}
         />
       </Paper>
 
@@ -133,18 +137,18 @@ const TableControl = ({fieldKey, columns, rows, onClickRow}) => {
 }
 
 TableControl.propTypes = {
-  fieldKey: PropTypes.string, 
+  fieldKey: PropTypes.string,
   columns: [
     PropTypes.shape(
-      { 
-        id: PropTypes.string, 
-        numeric: PropTypes.bool, 
-        disablePadding: PropTypes.bool, 
-        label: PropTypes.string, 
+      {
+        id: PropTypes.string,
+        numeric: PropTypes.bool,
+        disablePadding: PropTypes.bool,
+        label: PropTypes.string,
       }
     ),
-  ], 
-  rows: PropTypes.array.isRequired, 
+  ],
+  rows: PropTypes.array.isRequired,
   onClickRow: PropTypes.func,
 }
 

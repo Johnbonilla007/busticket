@@ -7,7 +7,7 @@ import { Button } from '@material-ui/core';
 
 import { restClient } from '../../services/restClient';
 import { utils } from '../../utils';
-import UnitTypeItem from './components/MotoristItem';
+import MotoristItem from './components/MotoristItem';
 import Dashboard from '../../Dashboard';
 import MenuScreen from '../../Controls/MenuScreen';
 import UploadImage from '../../Controls/UploadImage';
@@ -35,25 +35,25 @@ const Motorist = (props) => {
     const fetchMotorists = async () => {
         const response = await restClient.httpGet(url);
 
-        if(utils.evaluateArray(response)){
+        if (utils.evaluateArray(response)) {
             setMotorists(response);
         }
     }
 
     const handleSearchMotoristChange = async value => {
-        if(!value){
+        if (!value) {
             fetchMotorists();
             return;
         }
 
         const response = await restClient.httpGet(url, { conductor: { nombre: value } });
 
-        if(response == null){
+        if (response == null) {
             setMotorists([]);
             return;
         }
 
-        if(utils.evaluateObject(response)){
+        if (utils.evaluateObject(response)) {
             setMotorists([]);
 
             return;
@@ -76,7 +76,17 @@ const Motorist = (props) => {
     }
 
     const handleDeleleClick = row => async () => {
-        const response = await restClient.httpDelete(url, row.id);
+        const request = {
+            conductor: {
+                conductorId: row.conductorId
+            }
+        };
+
+        const response = await restClient.httpDelete(url, request);
+
+        if(response.mensaje === "Success"){
+            fetchMotorists();
+        }
     }
 
     const onRenderCellDelete = row => {
@@ -85,7 +95,7 @@ const Motorist = (props) => {
 
     const onRenderCellEdit = row => {
         return <PanelControl anchor="right" label={`Edit ${nameScreen}`} title={`Edit ${nameScreen}`}>
-            <UnitTypeItem item={row} isEditing fetchMotorists={fetchMotorists} url={url} />
+            <MotoristItem item={row} isEditing fetchMotorists={fetchMotorists} url={url} />
         </PanelControl>
     }
 
@@ -93,13 +103,13 @@ const Motorist = (props) => {
         <MotoristStyled>
             <h2>{nameScreen}</h2>
 
-            <TextFieldControl 
+            <TextFieldControl
                 // label={`Search ${nameScreen}`} 
-                placeholder="Escribe (ConductorId, Nombre, Identidad)" 
+                placeholder="Escribe (ConductorId, Nombre, Identidad)"
                 onEnter={handleSearchMotoristChange} />
 
             <PanelControl anchor="right" label={`Add ${nameScreen}`} title={`Add ${nameScreen}`}>
-                <UnitTypeItem fetchMotorists={fetchMotorists} url={url} />
+                <MotoristItem fetchMotorists={fetchMotorists} url={url} />
             </PanelControl>
 
             <TableControl

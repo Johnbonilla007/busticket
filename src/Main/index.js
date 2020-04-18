@@ -7,6 +7,7 @@ import Login from '../Containers/Login';
 import { ContainerMain } from './ContainerMain';
 
 import AlertNotification from '../Controls/Alert';
+import WaitControl from '../Controls/Wait';
 
 const MainStyled = styled.div`
     position: fixed;
@@ -29,6 +30,7 @@ export const Main = () =>
             </Router>
 
             <AlertNotification id="alert-notification" />
+            <WaitControl />
 
             {/* <div id="alert-notification" /> */}
             </MainStyled>
