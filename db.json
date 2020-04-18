@@ -155,7 +155,7 @@
   ],
   "transportationUnit": [
     {
-      "transportationUnitId": 1,
+      "id": 1,
       "motoristId": 1,
       "unitTypeId": 1,
       "transportationUnitNo": "A-31",

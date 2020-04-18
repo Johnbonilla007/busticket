@@ -15,6 +15,8 @@ const DestinationsStyled = styled.div`
     grid-template-rows: 60px 80px 40px calc(100% - 180px);
 `;
 
+const url = 'destinos';
+
 const Destinations = () => {
     const [destinations, setDestinations] = useState([]);
     const [destinationsFilters, setDestinationsFilters] = useState([]);
@@ -24,7 +26,7 @@ const Destinations = () => {
     }, []);
 
     const fetchDestinarions = async () => {
-        const response = await restClient.httpGet('destinations');
+        const response = await restClient.httpGet(url);
 
         setDestinations(response);
     }

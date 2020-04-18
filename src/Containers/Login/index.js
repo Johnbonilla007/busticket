@@ -87,11 +87,11 @@ const Login = ({ history }) => {
 
     const handleEnterClick = async () => {
 
-        const response = await restClient.httpLoginAcces('login', user);
+        // const response = await restClient.httpLoginAcces('login', user);
 
-        if (response) {
+        // if (response) {
             history.push('/home');
-        }
+        // }
     }
 
     return (

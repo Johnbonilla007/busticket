@@ -67,7 +67,12 @@ export class utils {
   };
 
   static evaluateObject = obj => {
+    if(Array.isArray(obj)){
+      return false;
+    }
+
     const result = !!(obj && Object.keys(obj).length);
+
     return result;
   };
 

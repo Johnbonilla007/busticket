@@ -9,6 +9,18 @@ const UnitTypeItemStyled = styled.div`
     display: grid;
     grid-template-rows: 100px 100px 100px 100px 100px;
     width: 600px;
+
+    @media screen and (max-width: 992px) {
+        width: 500px;
+    }
+
+    @media screen and (max-width: 700px) {
+        width: 400px;
+    }
+
+    @media screen and (max-width: 600px) {
+        width: 300px;
+    }
 `;
 
 
@@ -36,21 +48,21 @@ const UnitTypeItem = ({item, isEditing, fetchUnitTypes, url}) => {
     return (
         <UnitTypeItemStyled>
             <TextFieldControl 
-                initialValue={isEditing ? unitType.name : ''} 
+                initialValue={isEditing ? unitType.nombre : ''} 
                 label="Nombre Condutor" 
-                onChange={handleChange('name')} 
+                onChange={handleChange('nombre')} 
             />
 
             <TextFieldControl 
-                initialValue={isEditing ? unitType.identity : ''} 
+                initialValue={isEditing ? unitType.identidad : ''} 
                 label="Identidad" 
-                onChange={handleChange('identity')} 
+                onChange={handleChange('identidad')} 
             />
             
             <TextFieldControl 
-                initialValue={isEditing ? unitType.age : ''} 
+                initialValue={isEditing ? unitType.edad : ''} 
                 label="Edad" 
-                onChange={handleChange('age')} 
+                onChange={handleChange('edad')} 
             />
 
             <TextFieldControl 
@@ -60,9 +72,9 @@ const UnitTypeItem = ({item, isEditing, fetchUnitTypes, url}) => {
             />
 
             <TextFieldControl 
-                initialValue={isEditing ? unitType.phone : ''} 
+                initialValue={isEditing ? unitType.telefono : ''} 
                 label="Telefono" 
-                onChange={handleChange('phone')} 
+                onChange={handleChange('telefono')} 
             />
 
             <Button 

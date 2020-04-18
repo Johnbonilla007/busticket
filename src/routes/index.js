@@ -4,6 +4,7 @@ import Schedule from "../Containers/Schedule";
 import Reserve from "../Containers/Reserve";
 import Motorist from "../Containers/Motorist";
 import UnitType from "../Containers/UnitType";
+import TransportationUnit from "../Containers/TransportationUnit";
 import Test from "../Containers/Tests";
 
 
@@ -57,6 +58,13 @@ export const routes = [
         component: UnitType,
         pathIcon: motorists,
         description: 'Tipos de Unidades'
+    },
+    {
+        path: "/home/transportation-unit",
+        title: 'Transportation Units',
+        component: TransportationUnit,
+        pathIcon: motorists,
+        description: 'Unidades de Transporte'
     },
     {
         path: "/home/test",

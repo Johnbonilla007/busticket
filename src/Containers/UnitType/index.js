@@ -19,6 +19,7 @@ const UnitType = () => {
     const [unitTypes, setUnitTypes] = useState([]);
     const [unitTypeFilters, setUnitTypeFilters] = useState([]);
 
+    const nameScreen = 'Unit Type';
     const url = 'unitType';
 
     useEffect(() => {
@@ -51,7 +52,7 @@ const UnitType = () => {
     }
 
     const onRenderCellEdit = row => {
-        return <PanelControl anchor="right" label="Edit" title="Edit Destination">
+        return <PanelControl anchor="right" label={`Edit ${nameScreen}`} title={`Edit ${nameScreen}`}>
                     <UnitTypeItem item={row} isEditing fetchUnitTypes={fetchUnitTypes} url={url} />
                 </PanelControl>
     }
@@ -60,14 +61,14 @@ const UnitType = () => {
         <MotoristStyled>
             <h2>Unit Types</h2>
 
-            <TextFieldControl label="Search Destination" onChange={handleSearchUnitTypesChange} />
+            <TextFieldControl label={`Search ${nameScreen}`} onChange={handleSearchUnitTypesChange} />
 
-            <PanelControl anchor="right" label="Add Destination" title="Add Destination">
+            <PanelControl anchor="right" label={`Add ${nameScreen}`} title={`Add ${nameScreen}`}>
                 <UnitTypeItem fetchUnitTypes={fetchUnitTypes} url={url} />
             </PanelControl>
 
             <TableControl
-                fieldKey="destinationId"
+                fieldKey="id"
                 rows={utils.evaluateArray(unitTypeFilters) ? unitTypeFilters : unitTypes}
                 columns={
                     [

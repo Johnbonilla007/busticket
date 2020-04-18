@@ -7,7 +7,8 @@ import {
   CardActionArea,
   CardMedia,
   CardContent,
-  Typography
+  Typography,
+  Grow 
 } from '@material-ui/core';
 
 const useStyles = makeStyles(theme => ({
@@ -45,7 +46,7 @@ const useStyles = makeStyles(theme => ({
   },
 }));
 
-const CardItem = ({ item, onClick }) => {
+const CardItem = ({ item, onClick, index }) => {
   const classes = useStyles();
   const [expanded, setExpanded] = React.useState(false);
 
@@ -54,22 +55,25 @@ const CardItem = ({ item, onClick }) => {
   };
 
   return (
-    <Card elevation={0} className={classes.root} onClick={() => onClick(item)}>
-      <CardActionArea>
-        <CardMedia
-          className={classes.media}
-          image={item.pathIcon}
-          title={item.title}
-        />
+    <Grow in style={{ transformOrigin: '0 0 0' }}
+    {...{ timeout: 2000 * index }}>
+      <Card elevation={0} className={classes.root} onClick={() => onClick(item)}>
+        <CardActionArea>
+          <CardMedia
+            className={classes.media}
+            image={item.pathIcon}
+            title={item.title}
+          />
 
-        <CardContent>
-          <Typography variant="body2" color="textSecondary" component="p">
-            {item.description}
-          </Typography>
-        </CardContent>
+          <CardContent>
+            <Typography variant="body2" color="textSecondary" component="p">
+              {item.description}
+            </Typography>
+          </CardContent>
 
-      </CardActionArea>
-    </Card>
+        </CardActionArea>
+      </Card>
+    </Grow>
   );
 }
 

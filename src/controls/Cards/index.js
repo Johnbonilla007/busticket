@@ -15,7 +15,7 @@ const CardsStyled = styled.div`
 const Cards = ({items, height, onClick}) => {
 
     return <CardsStyled>
-                {utils.evaluateArray(items) ? items.map(item => <CardItem height={height} item={item} onClick={onClick} />) : null}
+                {utils.evaluateArray(items) ? items.map((item, index) => <CardItem index={index} height={height} item={item} onClick={onClick} />) : null}
             </CardsStyled>
 }
 
