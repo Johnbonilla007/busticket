@@ -8,6 +8,7 @@ import { ContainerMain } from './ContainerMain';
 
 import AlertNotification from '../Controls/Alert';
 import WaitControl from '../Controls/Wait';
+import BackgroundMain from '../BackgroundMain/main';
 
 const MainStyled = styled.div`
     position: fixed;
@@ -21,6 +22,7 @@ const MainStyled = styled.div`
 
 export const Main = () => 
             <MainStyled >
+                <BackgroundMain top="0px" />
                 <Router>
                   <Switch>
                       <Route path="/home" component={ContainerMain}/>

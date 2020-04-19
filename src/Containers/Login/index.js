@@ -1,8 +1,6 @@
 import React, { useState, useEffect } from 'react';
-import styled from 'styled-components';
 
-import Typography from '@material-ui/core/Typography';
-import Button from '@material-ui/core/Button';
+import { Button, Grow } from '@material-ui/core';
 
 import { TextFieldControl } from '../../Controls';
 import BackgroundMain from '../../BackgroundMain/main';
@@ -10,51 +8,9 @@ import BackgroundMain from '../../BackgroundMain/main';
 import logo from '../../logo.jpg';
 import { utils } from '../../utils';
 import { restClient } from '../../services/restClient';
+import RegisterUserForm from './components/RegisterUser';
+import { ContainerStyled } from './style';
 
-const ContainerStyled = styled.div`
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    height: 100%;
-    
-    .login {
-        display: flex;
-        justify-content: center;
-        align-items: center;
-        height: 100%;
-        width: 50%;
-
-        .fields {
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            /* width: 70%; */
-            padding: 10px;
-            margin: 10px;
-            /* background-color: rgba(0, 0, 0, 0.4); */
-            background: #ffffff;
-            border-radius: 5px;
-            z-index: 2;
-            opacity: 90%;
-
-            -moz-box-shadow: 11px 10px 5px -8px rgba(0,0,0,0.42);
-            box-shadow: 11px 10px 5px -8px rgba(0,0,0,0.42);
-
-            img {
-                height: 50%;
-                width: 50%;
-            }
-
-            width: 300px;
-            height: 260px;
-
-
-            .container-fields {
-                z-index: 3;
-            }
-        }
-    }
-`;
 
 
 const Login = ({ history }) => {
@@ -62,24 +18,6 @@ const Login = ({ history }) => {
         userName: '',
         password: '',
     });
-
-    const onSucccess = position => {
-        // location = position;
-    }
-
-    const onError = () => {
-        //   location = null;
-    }
-
-    if (!!navigator.geolocation) {
-        var config = {
-            enableHighAccuracy: true,
-            maximumAge: 30000,
-            timeout: 27000
-        };
-
-        navigator.geolocation.getCurrentPosition(onSucccess, onError, config);
-    }
 
     const handleChange = prop => (value) => {
         setUser({ ...user, [prop]: value });
@@ -90,29 +28,45 @@ const Login = ({ history }) => {
         // const response = await restClient.httpLoginAcces('login', user);
 
         // if (response) {
-            history.push('/home');
+        history.push('/home');
         // }
     }
 
     return (
         <ContainerStyled>
-            <BackgroundMain top="0px" />
-
             <div className="login">
-
                 <div className="fields">
-                    {/* <img src={logo} /> */}
 
-                    <div className="container-fields">
-                        <strong>Usuario</strong>
-                        <TextFieldControl onChange={handleChange('userName')} />
-
-                        <strong>Contraseña</strong>
-                        <TextFieldControl typeField="password" onChange={handleChange('password')} />
-
-                        <Button onClick={handleEnterClick} variant="contained" color="primary">Entrar</Button>
+                    <div className="field">
+                        <strong>Correo Electrónico</strong>
+                        <input onChange={handleChange('userName')} />
                     </div>
+
+                    <div className="field">
+                        <strong>Contraseña</strong>
+                        <input type="password" onChange={handleChange('password')} />
+                    </div>
+
+                    <Button
+                        className="button-enter"
+                        onClick={handleEnterClick}
+                        variant="contained" color="primary">
+                        Entrar
+                    </Button>
                 </div>
+
+                <div className="text">
+                    <Grow in style={{ transformOrigin: '0 0 0' }}
+                        {...{ timeout: 20000 }}>
+                        <strong>
+                            Reserva tu ticket, te llavaremos a donde tu imaginación pueda llegar...
+                        </strong>
+                    </Grow>
+                </div>
+            </div>
+
+            <div className="content">
+                <RegisterUserForm />
             </div>
         </ContainerStyled>
     )

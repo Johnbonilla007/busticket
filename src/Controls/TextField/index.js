@@ -10,10 +10,17 @@ import TextField from '@material-ui/core/TextField';
 import Visibility from '@material-ui/icons/Visibility';
 import VisibilityOff from '@material-ui/icons/VisibilityOff';
 
-import { useTextFieldStyles } from './style';
+import { useTextFieldStyles, useTextFieldSimpleStyles } from './style';
 
-const TextFieldControl = ({ typeField, initialValue, placeholder, prefix, label, onChange, onFocus, maxLength, theme, onEnter }) => {
+const TextFieldControl = ({ typeField, style, initialValue, placeholder, prefix, label, onChange, onFocus, maxLength, theme, onEnter }) => {
     const classes = useTextFieldStyles(theme);
+    const textFieldSimple = useTextFieldSimpleStyles(style ||
+        {
+            backgroundInput: 'white',
+            colorLabel: 'black',
+            color: 'black',
+            border: 'black'
+        });
 
     const [value, setValue] = useState(initialValue);
     const [showPassword, setShowPassword] = useState(false);
@@ -35,7 +42,7 @@ const TextFieldControl = ({ typeField, initialValue, placeholder, prefix, label,
 
     const handleOnKeyDown = e => {
         if (e.keyCode == 13) {
-            if(onEnter){
+            if (onEnter) {
                 onEnter(e.target.value);
             }
         }
@@ -46,7 +53,7 @@ const TextFieldControl = ({ typeField, initialValue, placeholder, prefix, label,
             case 'simple':
                 return <TextField
                     label={label}
-                    className={clsx(classes.margin, classes.textField)}
+                    className={clsx(textFieldSimple.margin, textFieldSimple.textField)}
                     onChange={handleChange}
                     value={value}
                 />;
@@ -77,12 +84,13 @@ const TextFieldControl = ({ typeField, initialValue, placeholder, prefix, label,
 
             case 'password':
                 return <FormControl className={clsx(classes.margin, classes.textField)}>
-                    <InputLabel htmlFor="standard-adornment-password">{label}</InputLabel>
+                    {label && <InputLabel htmlFor="standard-adornment-password">{label}</InputLabel>}
                     <Input
                         id="standard-adornment-password"
                         type={showPassword ? 'text' : 'password'}
                         value={value}
                         onChange={handleChange}
+                        placeholder={placeholder}
                         endAdornment={
                             <InputAdornment position="end">
                                 <IconButton

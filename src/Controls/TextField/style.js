@@ -55,3 +55,63 @@ const useStyle = makeStyles((theme) => ({
 
   return useStyle();
 }
+
+
+export const useTextFieldSimpleStyles = (style) => {
+
+  const useStyle = makeStyles((theme) => ({
+                  root: {
+                    display: 'flex',
+                    flexWrap: 'wrap',
+  
+                    '& .MuiTextField-root': {
+                      // background: style.backgroundInput || 'black',
+                      backgroundColor: '#ffffff',
+  
+                      '& .MuiFormLabel-root': {
+                        color:  style.colorLabel || 'black',
+                      },
+  
+                      '& .MuiInput-root': {
+                        color: style.color || 'black',
+                      },
+  
+                      '& .MuiInput-underline:before': {
+                        borderColor: style.border || 'black',
+                      },
+                    },
+  
+                    // '& label.Mui-focused': {
+                    //   color: 'green',
+                    // },
+                    // '& .MuiInput-underline:after': {
+                    //   borderBottomColor: 'green',
+                    // },
+                    // '& .MuiOutlinedInput-root': {
+                      // '& fieldset': {
+                      //   borderColor: 'red',
+                      // },
+                      
+                      // '&:hover fieldset': {
+                      //   borderColor: 'yellow',
+                      // },
+  
+                      // '&.Mui-focused fieldset': {
+                      //   borderColor: 'green',
+                      // },
+                    // },
+                  },
+                  margin: {
+                    margin: theme.spacing(1),
+                  },
+                  withoutLabel: {
+                    marginTop: theme.spacing(3),
+                  },
+                  textField: {
+                    width: '100%',
+                    background: style.backgroundColor,
+                  },
+                }));
+  
+    return useStyle();
+  }
