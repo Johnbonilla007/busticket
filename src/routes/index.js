@@ -20,7 +20,7 @@ export const routes = [
         path: "/home/client",
         title: 'Client',
         component: Client,
-        showInModal: true,
+        // showInModal: true,
         pathIcon: addClient,
         description: 'Administra Clientes'
     },
