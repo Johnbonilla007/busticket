@@ -1,9 +1,9 @@
 import React, { useState, useEffect } from 'react';
 import styled from 'styled-components';
 
-import{PanelControl, TableControl, TextFieldControl } from '../../Controls';
+import { PanelControl, TableControl, TextFieldControl } from '../../Controls';
 
-import {Button} from '@material-ui/core';
+import { Button } from '@material-ui/core';
 
 import { restClient } from '../../services/restClient';
 import { utils } from '../../utils';
@@ -17,10 +17,9 @@ const MotoristStyled = styled.div`
 
 const UnitType = () => {
     const [unitTypes, setUnitTypes] = useState([]);
-    const [unitTypeFilters, setUnitTypeFilters] = useState([]);
 
     const nameScreen = 'Unit Type';
-    const url = 'unitType';
+    const url = 'tipos-unidades';
 
     useEffect(() => {
         fetchUnitTypes();
@@ -32,19 +31,28 @@ const UnitType = () => {
         setUnitTypes(response);
     }
 
-    const handleSearchUnitTypesChange = value => {
-        const filters = unitTypes.filter(item => item.name.toUpperCase().includes(value.toUpperCase()));
+    const handleSearchUnitTypesEnter = async value => {
+        const response = await restClient.httpGet(url, {
+            tipoUnidad: {
+                categoria: value
+            }
+        });
 
-        if(utils.evaluateArray(filters)){
-            setUnitTypeFilters(filters);
-            return;
+        if (utils.evaluateArray(response)) {
+            setUnitTypes(response);
         }
-
-        setUnitTypeFilters([]);
     }
 
     const handleDeleleClick = row => async () => {
-        const response = await restClient.httpDelete(url, row.id);
+        const response = await restClient.httpDelete(url, {
+            tipoUnidad: {
+                tipoUnidadId: row.tipoUnidadId
+            }
+        });
+
+        if(response.mensaje === 'Success'){
+            fetchUnitTypes();
+        }
     }
 
     const onRenderCellDelete = row => {
@@ -53,23 +61,26 @@ const UnitType = () => {
 
     const onRenderCellEdit = row => {
         return <PanelControl anchor="right" label={`Edit ${nameScreen}`} title={`Edit ${nameScreen}`}>
-                    <UnitTypeItem item={row} isEditing fetchUnitTypes={fetchUnitTypes} url={url} />
-                </PanelControl>
+            <UnitTypeItem item={row} isEditing fetchUnitTypes={fetchUnitTypes} url={url} />
+        </PanelControl>
     }
 
     return (
         <MotoristStyled>
             <h2>Unit Types</h2>
 
-            <TextFieldControl label={`Search ${nameScreen}`} onChange={handleSearchUnitTypesChange} />
+            <TextFieldControl
+                placeholder="Escriba [Categoría]"
+                onEnter={handleSearchUnitTypesEnter}
+            />
 
             <PanelControl anchor="right" label={`Add ${nameScreen}`} title={`Add ${nameScreen}`}>
                 <UnitTypeItem fetchUnitTypes={fetchUnitTypes} url={url} />
             </PanelControl>
 
             <TableControl
-                fieldKey="id"
-                rows={utils.evaluateArray(unitTypeFilters) ? unitTypeFilters : unitTypes}
+                fieldKey="tipoUnidadId"
+                rows={utils.evaluateArray(unitTypes) ? unitTypes : []}
                 columns={
                     [
                         {
@@ -80,26 +91,26 @@ const UnitType = () => {
                             onRenderCell: onRenderCellDelete,
                         },
                         {
-                            id: 'id',
+                            id: 'tipoUnidadId',
                             numeric: false,
                             disablePadding: false,
-                            label: "Motorist Id",
+                            label: "Tipo Unidad Id",
                             minWidth: 10,
                         },
                         {
-                            id: 'category',
+                            id: 'categoria',
                             numeric: false,
                             disablePadding: false,
                             label: "Categoria",
                         },
                         {
-                            id: 'description',
+                            id: 'descripcion',
                             numeric: false,
                             disablePadding: false,
                             label: "Descripción",
                         },
                         {
-                            id: 'state',
+                            id: 'estado',
                             numeric: false,
                             disablePadding: false,
                             label: "Estado",
