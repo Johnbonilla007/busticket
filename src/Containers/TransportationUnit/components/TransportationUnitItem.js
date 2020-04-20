@@ -1,7 +1,7 @@
-import React, {useState} from 'react';
+import React, { useState } from 'react';
 import styled from 'styled-components';
-import {TextFieldControl} from '../../../Controls';
-import {Button} from '@material-ui/core';
+import { TextFieldControl } from '../../../Controls';
+import { Button } from '@material-ui/core';
 import { restClient } from '../../../services/restClient';
 import { utils } from '../../../utils';
 
@@ -12,68 +12,64 @@ const TransportationUnitItemStyled = styled.div`
 `;
 
 
-const TransportationUnitItem = ({item, isEditing, fetchTransportationUnits, url}) => {
-    const [unitType, setUnitType] = useState(item);
+const TransportationUnitItem = ({ item, isEditing, fetchTransportationUnits, url }) => {
+    const [transportationUnits, setTransportationUnits] = useState(item);
 
     const handleChange = prop => value => {
-        setUnitType({...unitType, [prop]: value});
+        setTransportationUnits({ ...transportationUnits, [prop]: value });
     }
 
     const handleAddTransportationUnitClick = async () => {
-        let response;
+        const response = await restClient.httpPost(url, {
+            unidadTransporte: transportationUnits
+        });
 
-        if(isEditing){
-            response = await restClient.httpPut(url, unitType);
-        }else{
-            response = await restClient.httpPost(url, unitType);
-        }
-
-        if(response === 'success' || utils.evaluateObject(response)){
+        if (response.mensaje === 'Success') {
             fetchTransportationUnits();
         }
     }
 
     return (
         <TransportationUnitItemStyled>
-            <TextFieldControl 
-                initialValue={isEditing ? unitType.name : ''} 
-                label="Conductor Id" 
-                onChange={handleChange('motoristId')} 
+            <TextFieldControl
+                initialValue={isEditing ? transportationUnits.conductorId : ''}
+                label="Conductor Id"
+                onChange={handleChange('conductorId')}
             />
 
-            <TextFieldControl 
-                initialValue={isEditing ? unitType.identity : ''} 
-                label="Tipo Unidad Id" 
-                onChange={handleChange('unitTypeId')} 
-            />
-            
-            <TextFieldControl 
-                initialValue={isEditing ? unitType.age : ''} 
-                label="Unidad Transporte No" 
-                onChange={handleChange('transportationUnitNo')} 
+            <TextFieldControl
+                initialValue={isEditing ? transportationUnits.tipoUnidadId : ''}
+                label="Tipo Unidad Id"
+                onChange={handleChange('tipoUnidadId')}
             />
 
-            <TextFieldControl 
-                initialValue={isEditing ? unitType.genero : ''} 
-                label="Capacidad" 
-                onChange={handleChange('capacity')} 
+            <TextFieldControl
+                initialValue={isEditing ? transportationUnits.unidadTransporteNo : ''}
+                label="Unidad Transporte No"
+                onChange={handleChange('unidadTransporteNo')}
             />
 
-            <TextFieldControl 
-                initialValue={isEditing ? unitType.phone : ''} 
-                label="Capacidad Fila" 
-                onChange={handleChange('capacityRow')} 
+            <TextFieldControl
+                initialValue={isEditing ? transportationUnits.capacidad : ''}
+                label="Capacidad"
+                onChange={handleChange('capacidad')}
             />
 
-            <TextFieldControl 
-                initialValue={isEditing ? unitType.phone : ''} 
-                label="Asientos Disponibles" 
-                onChange={handleChange('availableSeats')} 
+            <TextFieldControl
+                initialValue={isEditing ? transportationUnits.capacidadPorFilaUnidadTransporte : ''}
+                label="Capacidad Fila"
+                onChange={handleChange('capacidadPorFilaUnidadTransporte')}
             />
 
-            <Button 
-                variant="contained" 
-                color="primary" 
+            <TextFieldControl
+                initialValue={isEditing ? transportationUnits.asientosDisponibles : ''}
+                label="Asientos Disponibles"
+                onChange={handleChange('asientosDisponibles')}
+            />
+
+            <Button
+                variant="contained"
+                color="primary"
                 onClick={handleAddTransportationUnitClick} >
                 Add
             </Button>
