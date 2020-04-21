@@ -19,6 +19,7 @@ export const routes = [
     {
         path: "/home/client",
         title: 'Client',
+        name:"client",
         component: Client,
         // showInModal: true,
         pathIcon: addClient,
@@ -27,6 +28,7 @@ export const routes = [
     {
         path: "/home/reserve",
         title: 'Reserve',
+        name: 'reserve',
         component: Reserve,
         pathIcon: ticket,
         description: 'Conservar Tickets'
@@ -34,6 +36,7 @@ export const routes = [
     {
         path: "/home/destinations",
         title: 'Destinos',
+        name: 'destinos',
         component: Destinations,
         pathIcon: destinations,
         description: 'Lugares Disponibles Destinos'
@@ -41,6 +44,7 @@ export const routes = [
     {
         path: "/home/schedule",
         title: 'Schedule',
+        name: 'schedule',
         component: Schedule,
         pathIcon: schedule,
         description: 'Horarios Inicio / Final'
@@ -48,6 +52,7 @@ export const routes = [
     {
         path: "/home/motorist",
         title: 'Conductores',
+        name: 'conductores',
         component: Motorist,
         pathIcon: motorists,
         description: 'Conductores De Buses'
@@ -55,6 +60,7 @@ export const routes = [
     {
         path: "/home/unit-type",
         title: 'Unit Types',
+        name: 'unitTypes',
         component: UnitType,
         pathIcon: motorists,
         description: 'Tipos de Unidades'
@@ -62,15 +68,16 @@ export const routes = [
     {
         path: "/home/transportation-unit",
         title: 'Transportation Units',
+        name: 'transportationUnits',
         component: TransportationUnit,
         pathIcon: motorists,
         description: 'Unidades de Transporte'
     },
-    {
-        path: "/home/test",
-        title: 'Test',
-        component: Test,
-        pathIcon: motorists,
-        description: 'Este es un test de control'
-    },
+    // {
+    //     path: "/home/test",
+    //     title: 'Test',
+    //     component: Test,
+    //     pathIcon: motorists,
+    //     description: 'Este es un test de control'
+    // },
 ];

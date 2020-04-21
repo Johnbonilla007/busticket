@@ -27,27 +27,27 @@ const CardsPaymentStyled = styled.div`
 `;
 
 const cards = [
-    {
-        number: '1234568989457710',
-        name: 'Erlin Banegas',
-        expiry: '2024',
-        cvc: "1234",
-        focus: 'name'
-    },
-    {
-        number: '5234568989457710',
-        name: 'Erlin Banegas',
-        expiry: '2024',
-        cvc: "1234",
-        focus: 'name'
-    },
-    {
-        number: '4565454645612324',
-        name: 'Erlin Banegas',
-        expiry: '2024',
-        cvc: "4561",
-        focus: 'name'
-    },
+    // {
+    //     number: '1234568989457710',
+    //     name: 'Erlin Banegas',
+    //     expiry: '2024',
+    //     cvc: "1234",
+    //     focus: 'name'
+    // },
+    // {
+    //     number: '5234568989457710',
+    //     name: 'Erlin Banegas',
+    //     expiry: '2024',
+    //     cvc: "1234",
+    //     focus: 'name'
+    // },
+    // {
+    //     number: '4565454645612324',
+    //     name: 'Erlin Banegas',
+    //     expiry: '2024',
+    //     cvc: "4561",
+    //     focus: 'name'
+    // },
 ];
 
 const PaymentsCard = ({ onSelectedPaymentCard }) => {
@@ -97,6 +97,8 @@ const PaymentsCard = ({ onSelectedPaymentCard }) => {
             {utils.evaluateArray(paymentsCard) ? (
                 <div>
                     <Button onClick={handleCancelarClick}> Cancelar </Button>
+
+                    <p>Selecciona la tarjeta con la que pagaras</p>
                 </div>
                 ) : null
             }

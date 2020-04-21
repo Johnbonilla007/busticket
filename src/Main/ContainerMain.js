@@ -1,6 +1,6 @@
-import React, {useState} from 'react';
+import React, { useState } from 'react';
 import styled from 'styled-components';
-import {BrowserRouter as Router, Switch, Route, Link} from 'react-router-dom';
+import { BrowserRouter as Router, Switch, Route, Link } from 'react-router-dom';
 import PrimarySearchAppBar from '../Controls/AppBar';
 
 import { Header } from './Header';
@@ -32,11 +32,11 @@ const ComponentWithMenuStyled = styled.div`
     grid-template-rows: 120px calc(100% - 120px);
 `;
 
-const ComponentWithMenu = ({component, history, location, match}) => {
+const ComponentWithMenu = ({ component, history, location, match }) => {
 
-    const Component = React.createElement(component, {history, location, match});
-    
-    return(
+    const Component = React.createElement(component, { history, location, match });
+
+    return (
         <ComponentWithMenuStyled>
             <MenuScreen width={100} height={100} />
             {Component}
@@ -44,27 +44,28 @@ const ComponentWithMenu = ({component, history, location, match}) => {
     )
 }
 
-export const ContainerMain = ({history}) => {
+export const ContainerMain = ({ history }) => {
 
-    const routeComponents = routes.map(({path, component}, key) => 
-                                            <Route 
-                                                exact 
-                                                path={path} 
-                                                component={(props) => <ComponentWithMenu {...props} component={component} />} 
-                                                key={key} 
-                                            />
-                                        );
+    const routeComponents = routes.map(({ path, component }, key) =>
+        <Route
+            exact
+            path={path}
+            component={(props) => <ComponentWithMenu {...props} component={component} />}
+            key={key}
+        />
+    );
 
     return <ContainerMainStyled>
         <BackgroundMain top="70px" />
         <div className="container">
             <Header> <PrimarySearchAppBar /> </Header>
             {/* <Dashboard /> */}
-                <Router>
-                    <Switch>
-                        {routeComponents}
-                        <Route exact path="/home" component={Dashboard}/>
-                    </Switch>
-                </Router>
+            <Router>
+                <Switch>
+                    {routeComponents}
+                    <Route exact path="/home" component={Dashboard} />
+                </Switch>
+            </Router>
         </div>
-    </ContainerMainStyled>}
+    </ContainerMainStyled>
+}

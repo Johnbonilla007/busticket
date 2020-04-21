@@ -1,5 +1,5 @@
 import React from 'react';
-import {BrowserRouter as Router, Switch, Route, Link} from 'react-router-dom';
+import { BrowserRouter as Router, Switch, Route, Link } from 'react-router-dom';
 import styled from 'styled-components';
 
 import Login from '../Containers/Login';
@@ -9,6 +9,7 @@ import { ContainerMain } from './ContainerMain';
 import AlertNotification from '../Controls/Alert';
 import WaitControl from '../Controls/Wait';
 import BackgroundMain from '../BackgroundMain/main';
+import Store from '../Store';
 
 const MainStyled = styled.div`
     position: fixed;
@@ -20,19 +21,24 @@ const MainStyled = styled.div`
     background: #eeeeee;
 `;
 
-export const Main = () => 
-            <MainStyled >
-                <BackgroundMain top="0px" />
-                <Router>
-                  <Switch>
-                      <Route path="/home" component={ContainerMain}/>
+export const Main = () =>
+    <MainStyled >
+        <BackgroundMain top="0px" />
+        <Router>
+            <Switch>
+
+                <Route path="/home" render={props => <Store><ContainerMain {...props} /></Store>} />
+                <Route path="/dashboard" render={props => <Store><ContainerMain {...props} /></Store>} />
+                <Route path="/" render={props => <Store><Login {...props} /></Store>} />
+
+                {/* <Route path="/home" component={ContainerMain}/>
                       <Route path="/dashboard" component={ContainerMain}/>
-                      <Route path="/" component={Login}/>
-                </Switch>  
-            </Router>
+                      <Route path="/" component={Login}/> */}
+            </Switch>
+        </Router>
 
-            <AlertNotification id="alert-notification" />
-            <WaitControl />
+        <AlertNotification id="alert-notification" />
+        <WaitControl />
 
-            {/* <div id="alert-notification" /> */}
-            </MainStyled>
+        {/* <div id="alert-notification" /> */}
+    </MainStyled>

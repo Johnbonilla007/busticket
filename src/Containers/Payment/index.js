@@ -26,10 +26,10 @@ const PaymentStyled = styled.div`
 
 const PaymentControl = ({onRegisterPaymetCard}) => {
     const [paymentCard, setPaymentCard] = useState({
-        number: '1234568989457710',
-        name: 'Erlin Banegas',
-        expiry: '2024',
-        cvc:"1234",
+        number: '',
+        name: '',
+        expiry: '',
+        cvc:"",
         focus: 'name'
     });
 

@@ -4,14 +4,24 @@ import PaymentControl from '../../../Payment';
 import Client from './Client';
 import ScheduleItem from '../Schedule/ScheduleItem';
 import PaymentsCard from '../PaymentsCard';
-import {Button} from '@material-ui/core';
+import { Button } from '@material-ui/core';
 
 import { green } from '@material-ui/core/colors';
-import {ModalControl} from '../../../../Controls';
+import { ModalControl } from '../../../../Controls';
 
-const PaymentStyled = styled.div``;
+import withState from '../../../../Store/withState';
+import { restClient } from '../../../../services/restClient';
 
-const Payment = ({client, ticket, history}) => {
+const PaymentStyled = styled.div`
+    display: grid;
+    justify-content: center;
+
+    /* .detalle {
+        background: 
+    } */
+`;
+
+const Payment = ({ selectedDestinationItem, ticket, history, state }) => {
     const [open, setOpen] = useState(false);
 
     const onClose = () => {
@@ -22,7 +32,21 @@ const Payment = ({client, ticket, history}) => {
         setOpen(true);
     }
 
-    const handleSelectedPaymentCard = paymentCard => {
+    const handleSelectedPaymentCard = async paymentCard => {
+
+        
+        const response = await restClient.httpPost('reservas', {
+            reserva: {
+                catalogoViajeId: ticket.catalogoViajeId,
+                clienteId: state.client.clienteId,
+                estado: true,
+            }
+        })
+
+        if(!response.mensaje === 'Success') {
+            //Ocurrio algo malo
+        }
+
         history.push('../home');
         onClose();
     }
@@ -30,19 +54,25 @@ const Payment = ({client, ticket, history}) => {
     return (
         <PaymentStyled>
             {/* <TextFieldControl label="Identidad" /> */}
-            <Client client={client} />
+            <div>
+                <Client client={state.client} />
 
-            <h2>Destination</h2>
-            <ScheduleItem item={ticket} onClick={() => {}} showAction />
+                <h2>Tú Destino es: {selectedDestinationItem.nombreDestino}</h2>
 
-            <Button variant="contained" color='primary' onClick={handlerPagarClick}>Pagar</Button>
+                <div>
+                    <h4>Detalle</h4>
+                    <ScheduleItem item={ticket} onClick={() => { }} showAction />
+                </div>
 
-            <ModalControl open={open} onClose={onClose} width="300px">
-                <PaymentsCard onSelectedPaymentCard={handleSelectedPaymentCard} />
-            </ModalControl>
+                <Button variant="contained" color='primary' onClick={handlerPagarClick}>Pagar</Button>
+
+                <ModalControl open={open} onClose={onClose} width="300px">
+                    <PaymentsCard onSelectedPaymentCard={handleSelectedPaymentCard} />
+                </ModalControl>
+            </div>
         </PaymentStyled>
-    ) 
+    )
 }
 
 
-export default Payment;
+export default withState(Payment);

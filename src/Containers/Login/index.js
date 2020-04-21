@@ -10,26 +10,57 @@ import { utils } from '../../utils';
 import { restClient } from '../../services/restClient';
 import RegisterUserForm from './components/RegisterUser';
 import { ContainerStyled } from './style';
+import withState from '../../Store/withState';
 
 
 
-const Login = ({ history }) => {
+const Login = ({ history, dispatch }) => {
     const [user, setUser] = useState({
         userName: '',
         password: '',
     });
 
-    const handleChange = prop => (value) => {
-        setUser({ ...user, [prop]: value });
+    const handleChange = prop => event => {
+        setUser({ ...user, [prop]: event.target.value });
     }
 
     const handleEnterClick = async () => {
 
-        // const response = await restClient.httpLoginAcces('login', user);
+        if (!user.userName || !user.password) {
+            return;
+        }
 
-        // if (response) {
-        history.push('/home');
-        // }
+        const response = await restClient.httpPost('usuarios', {
+            usuario: user,
+        });
+
+        if (response.esAdmin) {
+            response.accesos = ['client', 'destinos', 'schedule', 'conductores', 'unitTypes', 'transportationUnits'];
+        } else {
+            response.accesos = ["reserve"];
+        }
+
+
+
+        if (response.mensaje === 'Autorizado') {
+
+            const clientResponse = await restClient.httpGet('clientes', {
+                cliente: {
+                    correoCliente: user.userName,
+                }
+            })
+
+            const payload = {
+                user: { ...response },
+                client: { ...clientResponse[0] }
+            };
+
+            sessionStorage.setItem('user', JSON.stringify(payload));
+
+            dispatch({ type: 'USER_ACTION', payload });
+
+            history.push('/home');
+        }
     }
 
     return (
@@ -73,4 +104,4 @@ const Login = ({ history }) => {
 }
 
 
-export default Login;
+export default withState(Login);

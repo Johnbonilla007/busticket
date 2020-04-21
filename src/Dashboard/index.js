@@ -1,25 +1,26 @@
-import React, {useState} from 'react';
+import React, { useState } from 'react';
 import styled from 'styled-components';
 
 import Cards from '../Controls/Cards';
 import { routes } from '../routes';
 import { utils } from '../utils';
-import {ModalControl} from '../Controls';
+import { ModalControl } from '../Controls';
 import NotificationTicket from './components/NotificationTicket';
 import MenuScreen from '../Controls/MenuScreen';
+import withState from '../Store/withState';
 
 const DashboardStyled = styled.div`
     opacity: 90%;
     display: grid;
 `;
 
-const Dashboard = ({history, match}) => {
+const Dashboard = ({ history, match, state }) => {
     const [open, setOpen] = useState(false);
     const [item, setItem] = useState({});
     
     const selectedItem = item => {
-        if(item.showInModal){
-            setItem({...item, Component: item.component});
+        if (item.showInModal) {
+            setItem({ ...item, Component: item.component });
             setOpen(true);
             return;
         }
@@ -32,26 +33,28 @@ const Dashboard = ({history, match}) => {
     }
 
     const getComponent = () => {
-     
-     
-     return React.createElement(item.Component);
+
+
+        return React.createElement(item.Component);
     };
 
     const renderModule = () => {
-        
+
     }
 
     const width = history.location.pathname === '/home' ? 300 : 200;
     const height = history.location.pathname === '/home' ? 200 : 120;
-    
-    return <DashboardStyled> 
-                <Cards items={routes} onRenderItem={renderModule} onClick={selectedItem} />
-                
-                {/* <MenuScreen width={width} height={height} /> */}
 
-                {/* <NotificationTicket /> */}
+    const authorizedScreens = routes.filter(route => state.user.accesos.some(name => name === route.name));
 
-                {/* <ModalControl
+    return <DashboardStyled>
+        <Cards items={authorizedScreens} onRenderItem={renderModule} onClick={selectedItem} />
+
+        {/* <MenuScreen width={width} height={height} /> */}
+
+        {/* <NotificationTicket /> */}
+
+        {/* <ModalControl
                     open={open}
                     onClose={handleOpenOnClick}
                     aria-labelledby="simple-modal-title"
@@ -59,7 +62,7 @@ const Dashboard = ({history, match}) => {
                 >
                     {utils.evaluateObject(item) && <div>{getComponent()}</div>}
                 </ModalControl> */}
-            </DashboardStyled>
+    </DashboardStyled>
 }
 
-export default Dashboard;
+export default withState(Dashboard);

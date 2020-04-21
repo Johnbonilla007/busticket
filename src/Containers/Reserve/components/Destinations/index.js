@@ -1,8 +1,10 @@
-import React, {useState} from 'react';
+import React, { useState, useEffect } from 'react';
 import styled from 'styled-components';
 
 import DestinationItem from './DestinationItem';
-import {TextFieldControl} from '../../../../Controls';
+import { TextFieldControl, TableControl } from '../../../../Controls';
+import { restClient } from '../../../../services/restClient';
+import { utils } from '../../../../utils';
 
 const DestinationsStyled = styled.div`
     display: grid;
@@ -26,11 +28,23 @@ const DestinationsStyled = styled.div`
     }
 `;
 
-const Destinations = ({data, onSelectedItem}) => {
-    const [destinations, setDestinations] = useState(data);
+const Destinations = ({ data, onSelectedItem }) => {
+    const [destinations, setDestinations] = useState([]);
+
+    useEffect(() => {
+        fetchDestinarions();
+    }, []);
+
+    const fetchDestinarions = async () => {
+        const response = await restClient.httpGet('destinos');
+
+        if (utils.evaluateArray(response)) {
+            setDestinations(response);
+        }
+    }
 
     const handleSearchDestinationChange = value => {
-        if(!value){
+        if (!value) {
             setDestinations(data);
             return;
         }
@@ -49,6 +63,37 @@ const Destinations = ({data, onSelectedItem}) => {
                 <div className="cards-container">
                     {destinations.map(item => <DestinationItem item={item} onClick={onSelectedItem} />)}
                 </div>
+
+                {/* <TableControl
+                    fieldKey="destinationId"
+                    rows={destinations}
+                    columns={[{
+                        id: 'destinoId',
+                        numeric: false,
+                        disablePadding: false,
+                        label: "Destino Id",
+                        minWidth: 10,
+                    },
+                    {
+                        id: 'nombreDestino',
+                        numeric: false,
+                        disablePadding: false,
+                        label: "Nombre Destino",
+                    },
+                    {
+                        id: 'departamentoDestino',
+                        numeric: false,
+                        disablePadding: false,
+                        label: "Departamento Destino",
+                    },
+                    {
+                        id: 'ciudadDestino',
+                        numeric: false,
+                        disablePadding: false,
+                        label: "Ciudad Destino",
+                    }]}
+                /> */}
+
             </div>
         </DestinationsStyled>
     )

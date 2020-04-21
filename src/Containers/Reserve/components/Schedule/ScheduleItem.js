@@ -20,36 +20,37 @@ const useStyles = makeStyles({
     },
   });
 
-const ScheduleItem = ({item, onClick, showAction}) => {
+const ScheduleItem = ({item, destinationItem, onClick, showAction}) => {
     const classes = useStyles();
+
     return (
         <Card className={classes.root} onClick={() => onClick(item)}>
         <CardActionArea>
-            <CardMedia
+            {/* <CardMedia
                 component="img"
                 alt={`Destination: ${item.destination}`}
                 height="140"
                 image={item.bus}
                 title={`Destination: ${item.destination}`}
-            />
+            /> */}
             <CardContent>
             <Typography gutterBottom variant="h5" component="h2">
-                {item.origen}
+                {item.transportationUnit.unitType.categoria}
             </Typography>
 
             <div style={{display: 'grid', gridTemplateColumns: '100px 200px'}}>
-                <strong>Destination:</strong>
-                    <Typography variant="body2" color="textSecondary" component="p">{item.destination}</Typography>
-                <strong>Ouput:</strong>
-                    <Typography variant="body2" color="textSecondary" component="p">{item.output}</Typography>
-                <strong>Final:</strong>
-                    <Typography variant="body2" color="textSecondary" component="p">{item.final}</Typography>
-                <strong>Transport:</strong>
-                    <Typography variant="body2" color="textSecondary" component="p">{item.transport}</Typography>
-                <strong>Capacity:</strong>
-                    <Typography variant="body2" color="textSecondary" component="p">{item.capacity}</Typography>
-                <strong>Available:</strong>
-                    <Typography variant="body2" color="textSecondary" component="p">{item.available}</Typography>
+                {/* <strong>Destination:</strong>
+                    <Typography variant="body2" color="textSecondary" component="p">{item.destinationItem}</Typography> */}
+                <strong>Salida:</strong>
+                    <Typography variant="body2" color="textSecondary" component="p">{item.horaSalida}</Typography>
+                <strong>Hora Llegada:</strong>
+                    <Typography variant="body2" color="textSecondary" component="p">{item.horaLlegada}</Typography>
+                <strong>Unidad Transporte:</strong>
+                    <Typography variant="body2" color="textSecondary" component="p">{item.transportationUnit.unidadTransporteNo}</Typography>
+                <strong>Capacidad:</strong>
+                    <Typography variant="body2" color="textSecondary" component="p">{item.transportationUnit.capacidad}</Typography>
+                <strong>Asientos Disponibles:</strong>
+                    <Typography variant="body2" color="textSecondary" component="p">{item.transportationUnit.asientosDisponibles}</Typography>
             </div>
             
             </CardContent>

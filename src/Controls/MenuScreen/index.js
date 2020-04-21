@@ -3,6 +3,7 @@ import styled from 'styled-components';
 import { Cards } from '..';
 import { routes } from '../../routes';
 import MenuScreenItem from './components/MenuScreenItem';
+import withState from '../../Store/withState';
 
 const MenuScreenStyled = styled.div`
     display: grid;
@@ -42,16 +43,18 @@ const MenuScreenStyled = styled.div`
 
 `;
 
-const MenuScreen = ({ width, height }) => {
+const MenuScreen = ({ width, height, state }) => {
 
     const handleSelectedItem = item => {
 
     }
 
+    const authorizedScreens = routes.filter(route => state.user.accesos.some(name => name === route.name));
+
     return (
         <MenuScreenStyled width={width} height={height}>
             <div className="cards-container">
-                {routes.map(item => <div className="card-item">
+                {authorizedScreens.map(item => <div className="card-item">
                     <MenuScreenItem
                         height={height}
                         width={width}
@@ -65,4 +68,4 @@ const MenuScreen = ({ width, height }) => {
     )
 }
 
-export default MenuScreen;
+export default withState(MenuScreen);

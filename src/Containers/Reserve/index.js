@@ -1,4 +1,4 @@
-import React, {useState} from 'react';
+import React, { useState } from 'react';
 import styled from 'styled-components';
 import { TextFieldControl } from '../../Controls';
 import Payment from './components/Payment';
@@ -12,7 +12,7 @@ const ReserveStyled = styled.div`
     display: grid;
 `;
 
-const Reserve = ({history}) => {
+const Reserve = ({ history }) => {
     const [client, setClient] = useState({
         name: "Erlin Banegas",
         genero: 'M',
@@ -39,18 +39,18 @@ const Reserve = ({history}) => {
     }
 
     const handleControlStep = index => {
-        if(index < activeStep){
+        if (index < activeStep) {
             setActiveStep(index);
         }
 
-        if(utils.evaluateObject(selectedDestinationItem)){
+        if (utils.evaluateObject(selectedDestinationItem)) {
             setActiveStep(index);
         }
     }
 
     return (
         <ReserveStyled>
-    
+
 
             {/* <StepperControl steps={[{step: 'Selecciona un Destino', component: <Destinations />}]} steps={['Selecciona un Destino', 'Horarios', 'Create an ad']} /> */}
 
@@ -58,16 +58,20 @@ const Reserve = ({history}) => {
                 {
                     [
                         {
-                            step: 'Selecciona un Destino', 
+                            step: 'Selecciona un Destino',
                             component: <Destinations data={destinationsData} onSelectedItem={handleSelectedItemClick} />
                         },
                         {
-                            step: 'Selecciona un Horario', 
-                            component: <Schedule schedulers={selectedDestinationItem.schedulers} onSelectedItem={handleSelectedScheduleItemClick} />
+                            step: 'Selecciona un Horario',
+                            component: <Schedule selectedDestinationItem={selectedDestinationItem} onSelectedItem={handleSelectedScheduleItemClick} />
                         },
                         {
-                            step: 'Resumen', 
-                            component: <Payment history={history} client={client} ticket={selectedScheduleItem} />
+                            step: 'Resumen',
+                            component: <Payment
+                                            history={history}
+                                            selectedDestinationItem={selectedDestinationItem}
+                                            ticket={selectedScheduleItem} 
+                                        />
                         },
                     ]
                 }
