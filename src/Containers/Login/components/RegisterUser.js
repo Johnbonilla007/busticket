@@ -77,7 +77,7 @@ const RegisterUserForm = () => {
 
         const response = await restClient.httpPost('clientes', request);
 
-        if (response.mensaje === 'Access') {
+        if (response.mensaje === 'Success') {
             const searchClient = await restClient.httpGet('clientes', {
                 cliente: {
                     correoCliente: user.email,

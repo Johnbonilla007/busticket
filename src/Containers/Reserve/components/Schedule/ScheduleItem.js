@@ -36,6 +36,7 @@ const ScheduleItem = ({item, destinationItem, onClick, showAction}) => {
             <CardContent>
             <Typography gutterBottom variant="h5" component="h2">
                 {item.transportationUnit.unitType.categoria}
+                <strong>{` ${item.precio}lps`}</strong>
             </Typography>
 
             <div style={{display: 'grid', gridTemplateColumns: '100px 200px'}}>
