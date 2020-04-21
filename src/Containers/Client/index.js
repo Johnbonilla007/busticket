@@ -1,55 +1,92 @@
-import React, {useState} from 'react';
-import clsx from 'clsx';
-
-
-import TextField from '@material-ui/core/TextField';
+import React, { useState, useEffect } from 'react';
 
 import { ClientStyled } from './style';
-import { Combobox, FormattedInput, TextFieldControl } from '../../Controls';
+import { TableControl, TextFieldControl, PanelControl } from '../../Controls';
+import ClientItem from './components/ClientItem';
+import { restClient } from '../../services/restClient';
+import { utils } from '../../utils';
+import { clientsColumnsTable } from './setting';
+import { Button } from '@material-ui/core';
+
+const url = 'clientes';
 
 const Client = () => {
-    const [client, setClient] = useState({
-        name: '',
-        genero: '',
-        age: '',
-        phone: '',
-        direction: '',
-        email: ''
-    });
+    const [clients, setClients] = useState([]);
 
-    const handleOnChange = prop => value => {
-        setClient({...client, [prop]: value});
+    useEffect(() => {
+        fetchClients();
+    }, []);
+
+    const fetchClients = async () => {
+        const response = await restClient.httpGet(url);
+
+        if (utils.evaluateArray(response)) {
+            setClients(response);
+        }
     }
 
-    const handleGeneroOnChange = option => {
-        setClient({...client, genero: option.key});
+    const handleSearchClientChange = async value => {
+        if (!value) {
+            fetchClients();
+            return;
+        }
+
+        const response = await restClient.httpGet(url, {
+            client: {
+                correoCliente: value
+            }
+        });
+
+        if (utils.evaluateArray(response)) {
+            setClients(response);
+            return;
+        }
+
+        setClients([]);
+    }
+
+    const onRenderCellEdit = row => {
+        return <PanelControl anchor="right" label="Edit" title="Edit Destination">
+            <ClientItem url={url} item={row} isEditing fetchClients={fetchClients} />
+        </PanelControl>
+    }
+
+    const handleDeleleClick = row => async () => {
+        const request = {
+            cliente: {
+                clienteId: row.clienteId
+            }
+        }
+
+        const response = await restClient.httpDelete(url, request);
+
+        if (response.mensaje === "Success") {
+            fetchClients();
+        }
+    }
+
+    const onRenderCellDelete = row => {
+        return <Button variant="contained" color="secondary" onClick={handleDeleleClick(row)}> Delete </Button>
     }
 
     return (
         <ClientStyled>
-            <h2>Agregar Cliente</h2>
-            <div className="container">
-                <TextFieldControl label="Nombre" onChange={handleOnChange('name')} />
-                <Combobox 
-                    label="Genero" 
-                    options={[{key: 'name', text: "Erlin"}, {key: 'lastName', text: "Banegas"}]} 
-                    onChange={handleOnChange('genero')}
-                />
-                <TextFieldControl typeField="number" label="Edad" onChange={handleOnChange('age')} />
-                <TextFieldControl 
-                    typeField="prefix" 
-                    label="Celular" 
-                    prefix={{position: 'start', text: '(504)'}} 
-                    onChange={handleOnChange('phone')} 
-                />
-                <TextFieldControl label="Dirección" onChange={handleOnChange('direction')} />
-                <TextFieldControl 
-                    typeField="prefix" 
-                    label="Correo Electrónico" 
-                    prefix={{position: 'end', text: '.com'}} 
-                    onChange={handleOnChange('email')}
-                />
-            </div>
+            <h2>Clientes</h2>
+
+            <TextFieldControl
+                placeholder="Escribe [Nombre]"
+                onEnter={handleSearchClientChange} />
+
+            <PanelControl anchor="right" label="Add Client" title="Add Client">
+                <ClientItem url={url} fetchClients={fetchClients} />
+            </PanelControl>
+
+            <TableControl
+                fieldKey="clienteId"
+                rows={clients}
+                columns={clientsColumnsTable(onRenderCellEdit, onRenderCellDelete)}
+            />
+
         </ClientStyled>
     )
 }
