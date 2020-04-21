@@ -63,19 +63,6 @@ const RegisterUserForm = () => {
 
     const handleRegisterClientClick = async () => {
 
-        const responseUser = await restClient.httpPost('usuarios/crear-usuario', {
-            usuario: {
-                userName: user.email,
-                password: user.password
-            }
-        })
-
-        debugger
-
-        if (!utils.evaluateObject(responseUser)) {
-            return;
-        }
-
         const request = {
             cliente: {
                 nombreCliente: `${user.name} ${user.lastName}`,
@@ -83,13 +70,34 @@ const RegisterUserForm = () => {
                 edadCliente: user.age,
                 telefonoCliente: user.phone,
                 direccionCliente: user.direction,
-                correoCliente: user.email
+                correoCliente: user.email,
+                identidad: user.identity,
             }
         }
 
         const response = await restClient.httpPost('clientes', request);
 
-        debugger
+        if (response.mensaje === 'Access') {
+            const searchClient = await restClient.httpGet('clientes', {
+                cliente: {
+                    correoCliente: user.email,
+                }
+            })
+
+            if (utils.evaluateArray(searchClient)) {
+                const responseUser = await restClient.httpPost('usuarios/crear-usuario', {
+                    usuario: {
+                        clienteId: searchClient[0].clienteId,
+                        userName: user.email,
+                        password: user.password
+                    }
+                })
+
+                if (!utils.evaluateObject(responseUser)) {
+                    return;
+                }
+            }
+        }
     }
 
     return (
